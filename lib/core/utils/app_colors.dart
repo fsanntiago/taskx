@@ -9,7 +9,7 @@ class AppColors {
   static const Color lightBottomBar = Color(0xffffffff);
   static const Color lightBackgroundColor = Color(0xfffefefe);
   static const Color lightShapeColor = Color(0xffffffff);
-  static const Color lightTitleColor = Color(0x00000000);
+  static const Color lightTitleColor = Color(0xff000000);
   static const Color lightMainTextColor = Color(0xff757575);
   static const Color lightTextSecondaryColor = Color(0xffababab);
   static const Color lightBackgroundProgress = Color(0xffeeeeee);
