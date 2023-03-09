@@ -49,6 +49,86 @@ class IntlStrings {
   static IntlStrings? maybeOf(BuildContext context) {
     return Localizations.of<IntlStrings>(context, IntlStrings);
   }
+
+  /// `Hey, {name} `
+  String greeting(Object name) {
+    return Intl.message(
+      'Hey, $name ',
+      name: 'greeting',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `So great to see you today!`
+  String get welcomeMessage {
+    return Intl.message(
+      'So great to see you today!',
+      name: 'welcomeMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tomorrow`
+  String get tomorrow {
+    return Intl.message(
+      'Tomorrow',
+      name: 'tomorrow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Day {day}`
+  String day(Object day) {
+    return Intl.message(
+      'Day $day',
+      name: 'day',
+      desc: '',
+      args: [day],
+    );
+  }
+
+  /// `Categories`
+  String get titleCategory {
+    return Intl.message(
+      'Categories',
+      name: 'titleCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tasks In Progress`
+  String get titleTasksinProgress {
+    return Intl.message(
+      'Tasks In Progress',
+      name: 'titleTasksinProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View all`
+  String get viewAll {
+    return Intl.message(
+      'View all',
+      name: 'viewAll',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<IntlStrings> {
@@ -57,6 +137,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<IntlStrings> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'pt', countryCode: 'BR'),
     ];
   }
 

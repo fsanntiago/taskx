@@ -1,6 +1,6 @@
 {
-    "@@locale": "en",
-    "greeting": "Hey, {name} ",
+    "@@locale": "pt-br",
+    "greeting": "Olá, {name} ",
     "@greeting": {
         "placeholder": {
             "name": {
@@ -9,16 +9,18 @@
         }
     },
 
-    "welcomeMessage": "So great to see you today!",
+    "welcomeMessage": "Tão bom ver você hoje!",
     "@welcomeMessage": {},
 
-    "today": "Today",
+
+
+    "today": "Hoje",
     "@today": {},
 
-    "tomorrow": "Tomorrow",
+    "tomorrow": "Amanhã",
     "@tomorrow": {},
-    
-    "day": "Day {day}",
+
+    "day": "Dia {day}",
     "@day": {
         "placeholder": {
             "count": {
@@ -27,15 +29,14 @@
         }
     },
 
-    "titleCategory": "Categories",
+    "titleCategory": "Categorias",
     "@titleCategory": {},
-
-    "titleTasksinProgress": "Tasks In Progress",
+    
+    
+    "titleTasksinProgress": "Tarefas Em Progresso",
     "@titleTasksinProgress": {},
 
-    "viewAll": "View all",
+    "viewAll": "Ver Tudo",
     "@viewAll": {}
 
 }
-    
-    

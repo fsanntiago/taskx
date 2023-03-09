@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a pt_BR locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,23 +18,23 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'pt_BR';
 
-  static String m0(day) => "Day ${day}";
+  static String m0(day) => "Dia ${day}";
 
-  static String m1(name) => "Hey, ${name} ";
+  static String m1(name) => "Olá, ${name} ";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "day": m0,
         "greeting": m1,
-        "titleCategory": MessageLookupByLibrary.simpleMessage("Categories"),
+        "titleCategory": MessageLookupByLibrary.simpleMessage("Categorias"),
         "titleTasksinProgress":
-            MessageLookupByLibrary.simpleMessage("Tasks In Progress"),
-        "today": MessageLookupByLibrary.simpleMessage("Today"),
-        "tomorrow": MessageLookupByLibrary.simpleMessage("Tomorrow"),
-        "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
+            MessageLookupByLibrary.simpleMessage("Tarefas Em Progresso"),
+        "today": MessageLookupByLibrary.simpleMessage("Hoje"),
+        "tomorrow": MessageLookupByLibrary.simpleMessage("Amanhã"),
+        "viewAll": MessageLookupByLibrary.simpleMessage("Ver Tudo"),
         "welcomeMessage":
-            MessageLookupByLibrary.simpleMessage("So great to see you today!")
+            MessageLookupByLibrary.simpleMessage("Tão bom ver você hoje!")
       };
 }
