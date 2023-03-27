@@ -7,6 +7,7 @@ class FontSize {
   static const double boxTitle = 16.0;
   static const double subTitle = 18.0;
   static const double title = 22.0;
+  static const double titleStartScreen = 32.0;
 }
 
 class FontThickness {

@@ -29,7 +29,7 @@ class CardListWidget extends StatelessWidget {
             margin: const EdgeInsets.only(left: 16, right: 6, bottom: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppColors.lightShapeColor,
+              color: AppColors.whiteColor,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.08),

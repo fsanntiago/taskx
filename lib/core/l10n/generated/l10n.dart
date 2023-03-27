@@ -61,10 +61,10 @@ class IntlStrings {
   }
 
   /// `So great to see you today!`
-  String get welcomeMessage {
+  String get onboardMessage {
     return Intl.message(
       'So great to see you today!',
-      name: 'welcomeMessage',
+      name: 'onboardMessage',
       desc: '',
       args: [],
     );

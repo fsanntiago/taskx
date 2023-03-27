@@ -41,12 +41,7 @@ class CardWidget extends StatelessWidget {
             padding: const EdgeInsets.all(6),
             child: Text(
               titleCategory.trim().capitalize(),
-              style: TextStyle(
-                color: colorTitleCategory,
-                fontSize: FontSize.body,
-                fontWeight: FontThickness.medium,
-                letterSpacing: LetterSpacingCustom.letterSpacing,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ),

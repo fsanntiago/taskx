@@ -28,13 +28,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "day": m0,
         "greeting": m1,
+        "onboardMessage":
+            MessageLookupByLibrary.simpleMessage("So great to see you today!"),
         "titleCategory": MessageLookupByLibrary.simpleMessage("Categories"),
         "titleTasksinProgress":
             MessageLookupByLibrary.simpleMessage("Tasks In Progress"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "tomorrow": MessageLookupByLibrary.simpleMessage("Tomorrow"),
-        "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
-        "welcomeMessage":
-            MessageLookupByLibrary.simpleMessage("So great to see you today!")
+        "viewAll": MessageLookupByLibrary.simpleMessage("View all")
       };
 }

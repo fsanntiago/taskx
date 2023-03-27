@@ -1,14 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_native_splash/cli_commands.dart';
+
 import 'package:taskX/core/functions/random_emoji.dart';
 import 'package:taskX/core/l10n/generated/l10n.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
-import 'package:badges/badges.dart' as badges;
+import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 
 class HomeCustomAppBarWidget extends StatelessWidget {
-  HomeCustomAppBarWidget({super.key});
+  final UserEntity user;
+
+  HomeCustomAppBarWidget({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
   final String emoji = randomEmoji();
 
   @override
@@ -25,13 +35,9 @@ class HomeCustomAppBarWidget extends StatelessWidget {
               children: [
                 Text(
                   IntlStrings.of(context).greeting(
-                    "Fabricio",
+                    user.name!.capitalize(),
                   ),
-                  style: const TextStyle(
-                    fontWeight: FontThickness.bold,
-                    fontSize: FontSize.title,
-                    wordSpacing: -0.41,
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 Text(
                   emoji,
@@ -41,12 +47,8 @@ class HomeCustomAppBarWidget extends StatelessWidget {
             ),
             sizeVer(4),
             Text(
-              IntlStrings.of(context).welcomeMessage,
-              style: const TextStyle(
-                fontSize: FontSize.body,
-                color: AppColors.lightMainTextColor,
-                letterSpacing: LetterSpacingCustom.letterSpacing,
-              ),
+              IntlStrings.of(context).onboardMessage,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),
@@ -54,17 +56,12 @@ class HomeCustomAppBarWidget extends StatelessWidget {
           position: badges.BadgePosition.topEnd(top: -10, end: -10),
           showBadge: true,
           ignorePointer: false,
-          badgeContent: const Padding(
-            padding: EdgeInsets.all(0.3),
+          badgeContent: Padding(
+            padding: const EdgeInsets.all(0.3),
             child: Center(
               child: Text(
                 "99+",
-                style: TextStyle(
-                  color: AppColors.lightShapeColor,
-                  fontSize: FontSize.details,
-                  fontWeight: FontThickness.medium,
-                  letterSpacing: LetterSpacingCustom.letterSpacing,
-                ),
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
           ),
@@ -77,7 +74,7 @@ class HomeCustomAppBarWidget extends StatelessWidget {
           ),
           badgeStyle: const badges.BadgeStyle(
             shape: badges.BadgeShape.circle,
-            badgeColor: Colors.blue,
+            badgeColor: AppColors.primaryColor,
             // padding: EdgeInsets.all(2),
             elevation: 1,
           ),

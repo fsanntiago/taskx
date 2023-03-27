@@ -22,22 +22,14 @@ class CustomTitleWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            color: AppColors.lightTitleColor,
-            fontSize: FontSize.subTitle,
-            fontWeight: FontThickness.medium,
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         GestureDetector(
           child: Row(
             children: [
               Text(
                 IntlStrings.of(context).viewAll,
-                style: const TextStyle(
-                  color: AppColors.lightTextSecondaryColor,
-                  fontSize: FontSize.details,
-                  fontWeight: FontThickness.medium,
-                ),
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               sizeHor(3),
               const Icon(

@@ -9,8 +9,8 @@
         }
     },
 
-    "welcomeMessage": "Tão bom ver você hoje!",
-    "@welcomeMessage": {},
+    "onboardMessage": "Tão bom ver você hoje!",
+    "@onboardMessage": {},
 
 
 

@@ -9,8 +9,8 @@
         }
     },
 
-    "welcomeMessage": "So great to see you today!",
-    "@welcomeMessage": {},
+    "onboardMessage": "So great to see you today!",
+    "@onboardMessage": {},
 
     "today": "Today",
     "@today": {},
