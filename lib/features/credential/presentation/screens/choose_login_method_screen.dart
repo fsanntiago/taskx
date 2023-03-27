@@ -11,8 +11,16 @@ import 'package:taskX/features/credential/presentation/cubit/credential_cubit.da
 import 'package:taskX/features/credential/presentation/widgets/login_with_google.dart';
 import 'package:taskX/features/credential/presentation/widgets/or_separator.dart';
 
-class ChooseLoginMethodScreen extends StatelessWidget {
+class ChooseLoginMethodScreen extends StatefulWidget {
   const ChooseLoginMethodScreen({super.key});
+
+  @override
+  State<ChooseLoginMethodScreen> createState() =>
+      _ChooseLoginMethodScreenState();
+}
+
+class _ChooseLoginMethodScreenState extends State<ChooseLoginMethodScreen> {
+  bool _isDisable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +54,48 @@ class ChooseLoginMethodScreen extends StatelessWidget {
                   scale: 4,
                 ),
                 sizeVer(60),
-                const LoginWithGoogle(),
+                BlocBuilder<CredentialCubit, CredentialState>(
+                  builder: (context, state) {
+                    if (state is CredentialLoginLoading) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return const LoginWithGoogle();
+                    }
+                  },
+                ),
                 sizeVer(26),
                 const OrSeparator(
                   text: "or",
                   color: AppColors.whiteColor,
                 ),
                 sizeVer(26),
-                CustomButton(
-                  text: "Continue with Email",
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      Routes.signUp,
-                    );
+                BlocListener<CredentialCubit, CredentialState>(
+                  listener: (context, state) {
+                    if (state is CredentialLoginLoading) {
+                      setState(() {
+                        _isDisable = true;
+                      });
+                    }
+                    if (state is CredentialLoginSuccess ||
+                        state is CredentialLoginError) {
+                      setState(() {
+                        _isDisable = false;
+                      });
+                    }
                   },
-                  icon: Feather.mail,
-                  textButtonColor: AppColors.blackColor,
-                  buttonColor: AppColors.primaryColor,
-                  shadowColor: AppColors.primaryColor,
+                  child: CustomButton(
+                    text: "Continue with Email",
+                    isDisable: _isDisable,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        Routes.signUp,
+                      );
+                    },
+                    icon: Feather.mail,
+                    textButtonColor: AppColors.blackColor,
+                    buttonColor: AppColors.primaryColor,
+                    shadowColor: AppColors.primaryColor,
+                  ),
                 ),
               ],
             ),

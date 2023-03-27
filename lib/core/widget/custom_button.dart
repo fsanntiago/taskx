@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
   final Color? textButtonColor;
   final String text;
   final IconData? icon;
+  final bool? isDisable;
 
   final void Function() onPressed;
 
@@ -25,24 +26,30 @@ class CustomButton extends StatelessWidget {
     this.icon,
     required this.onPressed,
     this.iconColor,
+    this.isDisable,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: isDisable == true ? null : onPressed,
       style: ButtonStyle(
-        fixedSize: MaterialStatePropertyAll(
-          Size.fromHeight(height ?? 50),
-        ),
+        fixedSize: MaterialStatePropertyAll(Size.fromHeight(height ?? 50)),
         elevation: const MaterialStatePropertyAll(12),
         shadowColor: MaterialStatePropertyAll(
           shadowColor != null
-              ? shadowColor!.withOpacity(0.6)
-              : AppColors.shadowBlueButtonColor.withOpacity(0.6),
+              ? isDisable == true
+                  ? shadowColor!.withOpacity(0.3)
+                  : shadowColor!.withOpacity(0.6)
+              : isDisable == true
+                  ? AppColors.shadowBlueButtonColor.withOpacity(0.3)
+                  : AppColors.shadowBlueButtonColor.withOpacity(0.6),
         ),
-        backgroundColor:
-            MaterialStatePropertyAll(buttonColor ?? AppColors.primaryColor),
+        backgroundColor: MaterialStatePropertyAll(
+          isDisable == true
+              ? AppColors.primaryColor.withOpacity(0.5)
+              : buttonColor ?? AppColors.primaryColor,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
