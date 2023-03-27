@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:taskX/core/l10n/generated/l10n.dart';
-import 'package:taskX/features/home/presentation/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskX/bloc_observer.dart';
+import 'package:taskX/container_injector.dart';
 
-void main() {
+import 'my_app.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  await initApp();
+
+  Bloc.observer = MyBlocObserver();
+
   runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData.light(),
-      theme: ThemeData(fontFamily: "Metropolis"),
-      localizationsDelegates: const [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        IntlStrings.delegate,
-      ],
-      supportedLocales: IntlStrings.delegate.supportedLocales,
-      home: const HomeScreen(),
-    );
-  }
 }

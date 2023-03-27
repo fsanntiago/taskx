@@ -1,0 +1,3 @@
+class Prefs {
+  Prefs._();
+}
