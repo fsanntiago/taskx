@@ -1,7 +1,7 @@
 class ErrorMessages {
   static const String weakPassword = "The password provided is too weak.";
   static const String existAccount = "That email address is already in use.";
-  static const String invalidLogin = "Incorrect username or password.";
+  static const String invalidLogin = "Incorrect name or password.";
   static const String userNotFound = "No user found for that email.";
   static const String tooManyRequests = "Too many requests. Try again later.";
   static const String operationNotAllowed =
@@ -14,4 +14,7 @@ class ErrorMessages {
       "The verification ID used to create the phone auth credential is invalid";
   static const String networkConnectionFailed =
       "No internet connection please check your connection and try again.";
+  static const String signInGoogleCanceled =
+      "The user canceled the sign-in flow.";
+  static const String missingGoogleIdToken = "Missing Google ID Token.";
 }

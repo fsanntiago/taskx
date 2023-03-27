@@ -24,7 +24,7 @@ class CredentialRepository implements BaseCredentialRepository {
   Future<Either<Failure, UserEntity>> loginWithGoogle() async {
     try {
       final user = await remoteCredentialDataSource.loginWithGoogle();
-      return Right(user);
+      return Right(user!);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }
@@ -41,10 +41,10 @@ class CredentialRepository implements BaseCredentialRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> signUp() async {
+  Future<Either<Failure, UserEntity>> signUp(UserEntity user) async {
     try {
-      final user = await remoteCredentialDataSource.signUp();
-      return Right(user);
+      final result = await remoteCredentialDataSource.signUp(user);
+      return Right(result);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

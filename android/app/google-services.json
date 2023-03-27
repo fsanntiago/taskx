@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "603354457355",
+    "project_id": "taskx-app-78c3f",
+    "storage_bucket": "taskx-app-78c3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603354457355:android:e65a3002841abb6aaa2e0e",
+        "android_client_info": {
+          "package_name": "com.example.taskx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603354457355-jcfccsg5o2iebism8ed0vv5nl78lc6tf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHXRD-Nd2HiFWU0XkqmABD7yPBifO3PJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603354457355-jcfccsg5o2iebism8ed0vv5nl78lc6tf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

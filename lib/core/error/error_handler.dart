@@ -47,6 +47,10 @@ Failure _handleError(FirebaseAuthException authException) {
       return const Failure(ErrorMessages.invalidVerificationId);
     case ErrorCodes.networkConnectionFailed:
       return const Failure(ErrorMessages.networkConnectionFailed);
+    case ErrorCodes.signInGoogleCanceled:
+      return const Failure(ErrorMessages.signInGoogleCanceled);
+    case ErrorCodes.missingGoogleIdToken:
+      return const Failure(ErrorMessages.missingGoogleIdToken);
     default:
       return const Failure(ErrorMessages.unexpectedError);
   }

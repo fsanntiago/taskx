@@ -28,3 +28,23 @@ class CredentialLoginError extends CredentialState {
   @override
   List<Object> get props => [message];
 }
+
+class CredentialSignUpLoading extends CredentialState {}
+
+class CredentialSignUpSuccess extends CredentialState {
+  final UserEntity user;
+
+  const CredentialSignUpSuccess({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}
+
+class CredentialSignUpError extends CredentialState {
+  final String message;
+
+  const CredentialSignUpError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

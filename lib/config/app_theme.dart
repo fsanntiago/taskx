@@ -61,7 +61,7 @@ class ThemeProvider with ChangeNotifier {
               ? AppColors.lightShapeColor
               : AppColors.darkShapeColor,
         ),
-        bodyLarge: AppTextStyles.textbold(
+        bodyLarge: AppTextStyles.textBold(
           color: isLightTheme
               ? AppColors.lightShapeColor
               : AppColors.darkShapeColor,

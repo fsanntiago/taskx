@@ -56,7 +56,9 @@ class ChooseLoginMethodScreen extends StatelessWidget {
                 CustomButton(
                   text: "Continue with Email",
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(Routes.signUp);
+                    Navigator.of(context).pushNamed(
+                      Routes.signUp,
+                    );
                   },
                   icon: Feather.mail,
                   textButtonColor: AppColors.blackColor,

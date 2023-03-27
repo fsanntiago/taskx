@@ -98,11 +98,20 @@ class AppTextStyles {
     );
   }
 
-  static TextStyle textbold({Color? color}) {
+  static TextStyle textBold({Color? color}) {
     return _setStyle(
       color: color,
       fontSize: FontSize.boxTitle,
       fontWeight: FontThickness.bold,
+      letterSpacing: LetterSpacingCustom.letterSpacing,
+    );
+  }
+
+  static TextStyle inputText({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.boxTitle,
+      fontWeight: FontThickness.medium,
       letterSpacing: LetterSpacingCustom.letterSpacing,
     );
   }

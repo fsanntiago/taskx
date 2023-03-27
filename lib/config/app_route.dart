@@ -41,7 +41,13 @@ class AppRouter {
         );
 
       case Routes.signUp:
-        return routeBuilder(const SignUpScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<CredentialCubit>.value(
+            value: _credentialCubit,
+            child: const SignUpScreen(),
+          ),
+        );
+
       case Routes.home:
         return routeBuilder(HomeScreen(user: args as UserEntity));
       default:

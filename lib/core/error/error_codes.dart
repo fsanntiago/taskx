@@ -12,4 +12,6 @@ class ErrorCodes {
   static const String invalidVerificationId = "invalid-verification-id";
   static const String unexpectedError = "unexpected_error";
   static const String networkConnectionFailed = "network-request-failed";
+  static const String signInGoogleCanceled = "sign_in_canceled";
+  static const String missingGoogleIdToken = "ERROR_MISSING_GOOGLE_ID_TOKEN";
 }

@@ -68,50 +68,6 @@ class CustomButton extends StatelessWidget {
           ),
         ],
       ),
-      // child: Container(
-      //   height: height ?? 50,
-      //   width: double.infinity,
-      //   alignment: Alignment.center,
-      //   decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.circular(5),
-      //     color: buttonColor ?? AppColors.primaryColor,
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: shadowColor != null
-      //             ? shadowColor!.withOpacity(0.18)
-      //             : AppColors.shadowBlueButtonColor.withOpacity(0.18),
-      //         spreadRadius: 4,
-      //         blurRadius: 12,
-      //         offset: const Offset(1, 0),
-      //       ),
-      //     ],
-      //   ),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       isGoogleButton == true
-      //           ? Container(
-      //               margin: const EdgeInsets.only(right: 8),
-      //               child: SvgPicture.asset(
-      //                 AppImages.googleIcon,
-      //                 height: 28,
-      //                 width: 28,
-      //               ),
-      //             )
-      //           : Container(
-      //               height: 0,
-      //             ),
-      //       Text(
-      //         text,
-      //         style: TextStyle(
-      //           color: textButtonColor ?? const Color(0xff000308),
-      //           fontSize: FontSize.boxTitle,
-      //           fontWeight: FontThickness.medium,
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
