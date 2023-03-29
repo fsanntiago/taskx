@@ -6,6 +6,7 @@ import 'package:taskX/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
 import 'package:taskX/features/credential/presentation/screens/choose_login_method_screen.dart';
+import 'package:taskX/features/credential/presentation/screens/sign_in_screen.dart';
 import 'package:taskX/features/credential/presentation/screens/sign_up_screen.dart';
 import 'package:taskX/features/home/presentation/screens/home_screen.dart';
 
@@ -15,6 +16,7 @@ class Routes {
   static const String chooseLoginMethod = "/chooseLoginMethod";
   static const String signUp = "/signUp";
   static const String home = "/home";
+  static const String signIn = "/signIn";
 }
 
 class AppRouter {
@@ -32,6 +34,7 @@ class AppRouter {
             child: const WelcomeScreen(),
           ),
         );
+
       case Routes.chooseLoginMethod:
         return MaterialPageRoute(
           builder: (context) => BlocProvider<CredentialCubit>.value(
@@ -45,6 +48,14 @@ class AppRouter {
           builder: (context) => BlocProvider<CredentialCubit>.value(
             value: _credentialCubit,
             child: const SignUpScreen(),
+          ),
+        );
+
+      case Routes.signIn:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<CredentialCubit>.value(
+            value: _credentialCubit,
+            child: const SignInScreen(),
           ),
         );
 

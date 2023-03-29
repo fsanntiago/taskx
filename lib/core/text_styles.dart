@@ -107,6 +107,15 @@ class AppTextStyles {
     );
   }
 
+  static TextStyle textRegularSecondary({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.boxTitle,
+      fontWeight: FontThickness.regular,
+      letterSpacing: LetterSpacingCustom.letterSpacing,
+    );
+  }
+
   static TextStyle inputText({Color? color}) {
     return _setStyle(
       color: color,

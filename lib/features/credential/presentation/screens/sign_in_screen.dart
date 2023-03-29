@@ -6,11 +6,10 @@ import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
 import 'package:taskX/features/credential/presentation/widgets/auth_instead_of.dart';
+import 'package:taskX/features/credential/presentation/widgets/signin_form_widget.dart';
 
-import 'package:taskX/features/credential/presentation/widgets/sigup_form_widget.dart';
-
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.chooseLoginMethod,
+                        Routes.signUp,
                         (route) => true,
                       );
                     },
@@ -48,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    "Sign Up",
+                    "Sign In",
                     style: TextStyle(
                       color: AppColors.whiteColor,
                       fontSize: FontSize.titleStartScreen,
@@ -59,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
                 sizeVer(26),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: SignUpFormWidget(),
+                  child: SignInFormWidget(),
                 ),
                 sizeVer(35),
                 const Divider(
@@ -69,9 +68,9 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 sizeVer(20),
                 const AuthInsteadOf(
-                  message: "Already have account? ",
-                  method: "Login",
-                  route: Routes.signIn,
+                  message: "Don't have account? ",
+                  method: "SignUp",
+                  route: Routes.signUp,
                 ),
                 sizeVer(20),
               ],

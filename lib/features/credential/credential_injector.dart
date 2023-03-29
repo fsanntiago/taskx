@@ -3,8 +3,8 @@ import 'package:taskX/features/credential/data/datasources/remote/base_remote_cr
 import 'package:taskX/features/credential/data/datasources/remote/credential_remote_datasource.dart';
 import 'package:taskX/features/credential/data/repositories/credential_repository.dart';
 import 'package:taskX/features/credential/domain/repositories/base_credential_repository.dart';
-import 'package:taskX/features/credential/domain/usecases/login_usecase.dart';
 import 'package:taskX/features/credential/domain/usecases/login_with_google_usecase.dart';
+import 'package:taskX/features/credential/domain/usecases/signin_usecase.dart';
 import 'package:taskX/features/credential/domain/usecases/signup_usecase.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
 
@@ -12,6 +12,7 @@ void initCredential() {
   // Cubit
   sl.registerFactory<CredentialCubit>(
     () => CredentialCubit(
+      signInUseCase: sl(),
       signUpUseCase: sl(),
       loginWithGoogleUseCase: sl(),
     ),
@@ -24,7 +25,7 @@ void initCredential() {
     ),
   );
   sl.registerLazySingleton(
-    () => LoginUseCase(
+    () => SignInUseCase(
       credentialRepository: sl(),
     ),
   );

@@ -42,6 +42,19 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
   }
 
   @override
+  Future<UserEntity> signIn(UserEntity user) async {
+    final UserCredential userCredential =
+        await firebaseAuth.signInWithEmailAndPassword(
+      email: user.email!,
+      password: user.password!,
+    );
+    final uid = userCredential.user!.uid;
+
+    final userModel = await firestoreManager.getUser(uid);
+    return userModel;
+  }
+
+  @override
   Future<UserEntity?> loginWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -94,12 +107,6 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
   @override
   Future<bool> resetPassword() {
     // TODO: implement resetPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserEntity> login() {
-    // TODO: implement signUp
     throw UnimplementedError();
   }
 }

@@ -11,10 +11,10 @@ class CredentialRepository implements BaseCredentialRepository {
   CredentialRepository({required this.remoteCredentialDataSource});
 
   @override
-  Future<Either<Failure, UserEntity>> login() async {
+  Future<Either<Failure, UserEntity>> signIn(UserEntity user) async {
     try {
-      final user = await remoteCredentialDataSource.login();
-      return Right(user);
+      final response = await remoteCredentialDataSource.signIn(user);
+      return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

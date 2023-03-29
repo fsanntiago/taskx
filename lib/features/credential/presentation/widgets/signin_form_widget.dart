@@ -7,32 +7,29 @@ import 'package:taskX/core/widget/form_field.dart';
 import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
 
-class SignUpFormWidget extends StatefulWidget {
-  const SignUpFormWidget({super.key});
+class SignInFormWidget extends StatefulWidget {
+  const SignInFormWidget({super.key});
 
   @override
-  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
+  State<SignInFormWidget> createState() => _SignInFormWidgetState();
 }
 
-class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+class _SignInFormWidgetState extends State<SignInFormWidget> {
   late final TextEditingController _emailController;
-  late final TextEditingController _nameController;
   late final TextEditingController _passwordController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isSigningUp = false;
+  bool _isSigningIn = false;
 
   @override
   void initState() {
     super.initState();
     _emailController = TextEditingController();
-    _nameController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
     _emailController.dispose();
-    _nameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -44,19 +41,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
       child: Column(
         children: [
           CustomFormField(
-            readOnly: _isSigningUp == true ? true : false,
-            controller: _nameController,
-            labelText: "Name",
-            maxLength: 120,
-            textInputAction: TextInputAction.next,
-            validator: (String? value) {
-              if (value!.isEmpty) return "Name is Required";
-              return null;
-            },
-          ),
-          sizeVer(10),
-          CustomFormField(
-            readOnly: _isSigningUp == true ? true : false,
+            readOnly: _isSigningIn == true ? true : false,
             controller: _emailController,
             labelText: "Email",
             maxLength: 80,
@@ -72,7 +57,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
           ),
           sizeVer(10),
           CustomFormField(
-            readOnly: _isSigningUp == true ? true : false,
+            readOnly: _isSigningIn == true ? true : false,
             isPasswordField: true,
             labelText: "Password",
             maxLength: 90,
@@ -90,9 +75,9 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 return const CircularProgressIndicator();
               } else {
                 return CustomButton(
-                  text: "Get Started",
+                  text: "Login",
                   onPressed: () {
-                    _signUpUser();
+                    _signInUser();
                   },
                 );
               }
@@ -103,19 +88,18 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
     );
   }
 
-  _signUpUser() {
+  _signInUser() {
     if (_formKey.currentState!.validate()) {
       UserEntity user = UserEntity(
         email: _emailController.text,
         password: _passwordController.text,
-        name: _nameController.text,
       );
       setState(() {
-        _isSigningUp = true;
+        _isSigningIn = true;
       });
       context
           .read<CredentialCubit>()
-          .signUp(user: user)
+          .signIn(user: user)
           .then((value) => _clear());
     }
   }
@@ -123,9 +107,8 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   _clear() {
     setState(() {
       _emailController.clear();
-      _nameController.clear();
       _passwordController.clear();
-      _isSigningUp = false;
+      _isSigningIn = false;
     });
   }
 }
