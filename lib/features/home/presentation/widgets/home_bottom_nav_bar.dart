@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:taskX/core/utils/app_colors.dart';
+import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 
 class HomeBottomNavBar extends StatelessWidget {
   const HomeBottomNavBar({super.key});
@@ -15,6 +17,9 @@ class HomeBottomNavBar extends StatelessWidget {
         _bottomNavigationIcon(Icons.calendar_month_outlined, "Calender"),
         _bottomNavigationIcon(Feather.user, "Profile"),
       ],
+      onTap: (index) {
+        context.read<HomeCubit>().changeScreenModule(index: index);
+      },
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: false,
       showUnselectedLabels: false,

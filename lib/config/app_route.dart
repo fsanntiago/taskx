@@ -8,6 +8,7 @@ import 'package:taskX/features/credential/presentation/cubit/credential_cubit.da
 import 'package:taskX/features/credential/presentation/screens/choose_login_method_screen.dart';
 import 'package:taskX/features/credential/presentation/screens/sign_in_screen.dart';
 import 'package:taskX/features/credential/presentation/screens/sign_up_screen.dart';
+import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 import 'package:taskX/features/home/presentation/screens/home_screen.dart';
 
 class Routes {
@@ -60,7 +61,12 @@ class AppRouter {
         );
 
       case Routes.home:
-        return routeBuilder(HomeScreen(user: args as UserEntity));
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<HomeCubit>(
+            create: (context) => sl<HomeCubit>(),
+            child: HomeScreen(user: args as UserEntity),
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

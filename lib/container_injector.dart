@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
 import 'package:taskX/features/auth/auth_injector.dart';
 import 'package:taskX/features/credential/credential_injector.dart';
+import 'package:taskX/features/home/home_injector.dart';
 
 final sl = GetIt.instance;
 
@@ -12,6 +13,7 @@ Future<void> initApp() async {
   _initFirebase();
   initAuth();
   initCredential();
+  initHome();
 }
 
 void _initCore() {

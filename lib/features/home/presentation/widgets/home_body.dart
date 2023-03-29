@@ -20,64 +20,66 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.only(top: 12, right: 16, left: 16),
-          child: HomeCustomAppBarWidget(user: user),
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 16),
-          child: const DateWidget(),
-        ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          margin: const EdgeInsets.only(top: 18, bottom: 8),
-          child: CustomTitleWidget(
-            title: IntlStrings.of(context).titleCategory,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: 12, right: 16, left: 16),
+            child: HomeCustomAppBarWidget(user: user),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: 10,
+          Container(
+            margin: const EdgeInsets.only(left: 16),
+            child: const DateWidget(),
           ),
-          child: CardListWidget(
-            width: 140,
-            height: 120,
-            childItem: CardWidget(
-              isClickable: false,
-              isCategory: true,
-              titleCategory: "31",
-              backgroundColorTitleCategory: Colors.red.shade100,
-              colorTitleCategory: Colors.red,
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.only(top: 18, bottom: 8),
+            child: CustomTitleWidget(
+              title: IntlStrings.of(context).titleCategory,
             ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          margin: const EdgeInsets.only(bottom: 8),
-          child: CustomTitleWidget(
-              title: IntlStrings.of(context).titleTasksinProgress),
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: 10,
-          ),
-          child: CardListWidget(
-            width: 240,
-            height: 160,
-            childItem: CardWidget(
-              isClickable: false,
-              isCategory: false,
-              titleCategory: "31",
-              backgroundColorTitleCategory: Colors.blue.shade100,
-              colorTitleCategory: Colors.blue,
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: 10,
+            ),
+            child: CardListWidget(
+              width: 140,
+              height: 120,
+              childItem: CardWidget(
+                isClickable: false,
+                isCategory: true,
+                titleCategory: "31",
+                backgroundColorTitleCategory: Colors.red.shade100,
+                colorTitleCategory: Colors.red,
+              ),
             ),
           ),
-        ),
-      ],
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.only(bottom: 8),
+            child: CustomTitleWidget(
+                title: IntlStrings.of(context).titleTasksinProgress),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: 10,
+            ),
+            child: CardListWidget(
+              width: 240,
+              height: 160,
+              childItem: CardWidget(
+                isClickable: false,
+                isCategory: false,
+                titleCategory: "31",
+                backgroundColorTitleCategory: Colors.blue.shade100,
+                colorTitleCategory: Colors.blue,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
