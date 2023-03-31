@@ -28,6 +28,7 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
       final uid = userCredential.user!.uid;
 
       UserModel userModel = UserModel(
+        createdAt: DateTime.now().toUtc(),
         email: user.email!.trim(),
         name: user.name!.trim(),
         uid: uid,
@@ -97,6 +98,7 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
       email: googleUser.email,
       name: googleUser.displayName,
       uid: googleUser.uid,
+      createdAt: DateTime.now().toUtc(),
     );
 
     // Add Google user to firestore

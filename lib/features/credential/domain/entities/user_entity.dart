@@ -1,12 +1,17 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
-// part 'user_entity.g.dart';
+part 'user_entity.g.dart';
 
-class UserEntity extends Equatable {
+@HiveType(typeId: 0)
+class UserEntity extends HiveObject with EquatableMixin {
+  @HiveField(0)
   final String? uid;
-
+  @HiveField(1)
+  final DateTime? createdAt;
+  @HiveField(2)
   final String? name;
-
+  @HiveField(3)
   final String? email;
 
   // will not going to store in DB
@@ -14,8 +19,9 @@ class UserEntity extends Equatable {
   final String? password;
   final String? otherUid;
 
-  const UserEntity({
+  UserEntity({
     this.uid,
+    this.createdAt,
     this.name,
     this.email,
     this.password,
@@ -26,6 +32,7 @@ class UserEntity extends Equatable {
   List<Object?> get props => [
         uid,
         name,
+        createdAt,
         email,
         password,
         otherUid,

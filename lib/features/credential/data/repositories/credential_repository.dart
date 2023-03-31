@@ -1,4 +1,5 @@
 import 'package:taskX/core/error/error_handler.dart';
+import 'package:taskX/core/utils/app_boxes.dart';
 import 'package:taskX/features/credential/data/datasources/remote/base_remote_credential_datasource.dart';
 import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/core/error/failure.dart';
@@ -14,6 +15,7 @@ class CredentialRepository implements BaseCredentialRepository {
   Future<Either<Failure, UserEntity>> signIn(UserEntity user) async {
     try {
       final response = await remoteCredentialDataSource.signIn(user);
+      AppBoxes.userBox.put(AppBoxesKeys.user, response);
       return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
@@ -24,7 +26,8 @@ class CredentialRepository implements BaseCredentialRepository {
   Future<Either<Failure, UserEntity>> loginWithGoogle() async {
     try {
       final user = await remoteCredentialDataSource.loginWithGoogle();
-      return Right(user!);
+      AppBoxes.userBox.put(AppBoxesKeys.user, user!);
+      return Right(user);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }
@@ -43,8 +46,9 @@ class CredentialRepository implements BaseCredentialRepository {
   @override
   Future<Either<Failure, UserEntity>> signUp(UserEntity user) async {
     try {
-      final result = await remoteCredentialDataSource.signUp(user);
-      return Right(result);
+      final response = await remoteCredentialDataSource.signUp(user);
+      AppBoxes.userBox.put(AppBoxesKeys.user, response);
+      return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
     }

@@ -9,13 +9,18 @@ class UserModel extends UserEntity {
   final String? name;
 
   @override
+  final DateTime? createdAt;
+
+  @override
   final String? email;
 
-  const UserModel({
+  UserModel({
     this.uid,
     this.email,
     this.name,
+    this.createdAt,
   }) : super(
+          createdAt: createdAt,
           email: email,
           uid: uid,
           name: name,
@@ -28,6 +33,7 @@ class UserModel extends UserEntity {
       uid: snapshot['uid'],
       email: snapshot['email'],
       name: snapshot['name'],
+      createdAt: snapshot['createdAt'],
     );
   }
 
@@ -35,5 +41,6 @@ class UserModel extends UserEntity {
         "uid": uid,
         "email": email,
         "name": name,
+        "createdAt": createdAt,
       };
 }

@@ -1,10 +1,11 @@
 import 'package:taskX/container_injector.dart';
+import 'package:taskX/features/auth/data/datasources/local/base_local_auth_datasource.dart';
+import 'package:taskX/features/auth/data/datasources/local/local_auth_datasource.dart';
 import 'package:taskX/features/auth/data/datasources/remote/base_remote_auth_datasource.dart';
 import 'package:taskX/features/auth/data/datasources/remote/remote_auth_datasource.dart';
 import 'package:taskX/features/auth/data/repositories/auth_repository.dart';
 import 'package:taskX/features/auth/domain/repositories/base_auth_repository.dart';
 import 'package:taskX/features/auth/domain/usecases/get_current_user_usercase.dart';
-import 'package:taskX/features/auth/domain/usecases/is_sign_in_usercase.dart';
 import 'package:taskX/features/auth/presentation/cubit/auth_cubit.dart';
 
 void initAuth() {
@@ -12,7 +13,6 @@ void initAuth() {
   sl.registerFactory<AuthCubit>(
     () => AuthCubit(
       getCurrentUserUserCase: sl(),
-      isSignInUseCase: sl(),
     ),
   );
 
@@ -20,18 +20,20 @@ void initAuth() {
   sl.registerLazySingleton(
     () => GetCurrentUserUserCase(authRepository: sl()),
   );
-  sl.registerLazySingleton(
-    () => IsSignInUseCase(authRepository: sl()),
-  );
 
   // Repositories
   sl.registerLazySingleton<BaseAuthRepository>(
     () => AuthRepository(
+      checkInternetConnectivity: sl(),
       remoteAuthDataSource: sl(),
+      localAuthDataSource: sl(),
     ),
   );
 
   // Local data sources
+  sl.registerLazySingleton<BaseLocalAuthDataSource>(
+    () => LocalAuthDataSource(),
+  );
 
   // Remote data sources
   sl.registerLazySingleton<BaseRemoteAuthDataSource>(
