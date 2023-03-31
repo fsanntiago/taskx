@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:taskX/core/utils/app_assets_images.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
@@ -8,13 +10,20 @@ import 'package:taskX/features/credential/presentation/cubit/credential_cubit.da
 import '../../../../core/utils/app_fonts.dart';
 
 class LoginWithGoogle extends StatelessWidget {
-  const LoginWithGoogle({super.key});
+  final bool? isDisable;
+
+  const LoginWithGoogle({
+    Key? key,
+    this.isDisable,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.read<CredentialCubit>().loginWithGoogle();
+        isDisable == true
+            ? null
+            : context.read<CredentialCubit>().loginWithGoogle();
       },
       style: ButtonStyle(
         fixedSize: const MaterialStatePropertyAll(

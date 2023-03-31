@@ -58,6 +58,11 @@ class _ChooseLoginMethodScreenState extends State<ChooseLoginMethodScreen> {
                   builder: (context, state) {
                     if (state is CredentialLoginLoading) {
                       return const CircularProgressIndicator();
+                    }
+                    if (state is CredentialLoginSuccess) {
+                      return const LoginWithGoogle(
+                        isDisable: true,
+                      );
                     } else {
                       return const LoginWithGoogle();
                     }
@@ -79,7 +84,7 @@ class _ChooseLoginMethodScreenState extends State<ChooseLoginMethodScreen> {
                     if (state is CredentialLoginSuccess ||
                         state is CredentialLoginError) {
                       setState(() {
-                        _isDisable = false;
+                        _isDisable = true;
                       });
                     }
                   },
