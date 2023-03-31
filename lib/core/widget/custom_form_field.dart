@@ -16,6 +16,13 @@ class CustomFormField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final int? maxLength;
   final bool? readOnly;
+  final Color? fillColor;
+  final int? maxLines;
+  final String? counterText;
+  final void Function(String)? onChanged;
+  final Color? labelColor;
+  final String? hintText;
+  final Color? inputTextColor;
 
   const CustomFormField({
     super.key,
@@ -31,6 +38,13 @@ class CustomFormField extends StatefulWidget {
     this.textInputAction,
     this.maxLength,
     this.readOnly,
+    this.fillColor,
+    this.maxLines,
+    this.counterText,
+    this.onChanged,
+    this.labelColor,
+    this.hintText,
+    this.inputTextColor,
   });
 
   @override
@@ -44,6 +58,8 @@ class _CustomFormFieldState extends State<CustomFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      onChanged: widget.onChanged,
+      maxLines: widget.maxLines ?? 1,
       maxLength: widget.maxLength,
       readOnly: widget.readOnly ?? false,
       keyboardType: widget.inputType,
@@ -53,11 +69,30 @@ class _CustomFormFieldState extends State<CustomFormField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       textInputAction: widget.textInputAction,
       obscureText: widget.isPasswordField == true ? _obscureText : false,
-      style: AppTextStyles.inputText(color: AppColors.whiteColor),
-      cursorColor: AppColors.whiteColor.withOpacity(0.5),
+      style: AppTextStyles.inputText(
+        color: widget.inputTextColor ?? AppColors.whiteColor,
+      ),
+      cursorColor:
+          widget.inputTextColor ?? AppColors.whiteColor.withOpacity(0.5),
       decoration: InputDecoration(
+        hintText: widget.hintText ?? "",
         filled: true,
-        fillColor: AppColors.darkBlueColorSecondary,
+        fillColor: widget.fillColor ?? AppColors.darkBlueColorSecondary,
+        counterText: widget.counterText,
+        border: InputBorder.none,
+        labelText: widget.labelText,
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.errorColor,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppColors.errorColor,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -67,29 +102,27 @@ class _CustomFormFieldState extends State<CustomFormField> {
           ),
           borderRadius: BorderRadius.circular(5),
         ),
-        labelText: widget.labelText,
-        border: InputBorder.none,
         labelStyle: AppTextStyles.inputText(
-          color: AppColors.whiteColor.withOpacity(0.5),
+          color: widget.labelColor != null
+              ? widget.labelColor!.withOpacity(0.5)
+              : AppColors.whiteColor.withOpacity(0.5),
         ),
         suffixIconConstraints: widget.isPasswordField == true
             ? const BoxConstraints(minHeight: 50, minWidth: 40)
             : const BoxConstraints(),
         suffixIcon: widget.isPasswordField == true
-            ? Container(
-                // color: Colors.amber,
-                child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                    child: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: _obscureText == false
-                          ? AppColors.primaryColor
-                          : AppColors.whiteColor.withOpacity(0.5),
-                    )),
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+                child: Icon(
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: _obscureText == false
+                      ? AppColors.primaryColor
+                      : AppColors.whiteColor.withOpacity(0.5),
+                ),
               )
             : Container(
                 color: Colors.amber,
