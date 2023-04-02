@@ -14,16 +14,21 @@ class UserModel extends UserEntity {
   @override
   final String? email;
 
+  @override
+  final int? totalCategory;
+
   UserModel({
     this.uid,
     this.email,
     this.name,
     this.createdAt,
+    this.totalCategory,
   }) : super(
           createdAt: createdAt,
           email: email,
           uid: uid,
           name: name,
+          totalCategory: totalCategory,
         );
 
   factory UserModel.fromSnapshot(DocumentSnapshot snap) {
@@ -33,7 +38,8 @@ class UserModel extends UserEntity {
       uid: snapshot['uid'],
       email: snapshot['email'],
       name: snapshot['name'],
-      createdAt: snapshot['createdAt'],
+      createdAt: snapshot['createdAt'].toDate(),
+      totalCategory: snapshot['totalCategory'] as int,
     );
   }
 
@@ -42,5 +48,6 @@ class UserModel extends UserEntity {
         "email": email,
         "name": name,
         "createdAt": createdAt,
+        "totalCategory": totalCategory,
       };
 }

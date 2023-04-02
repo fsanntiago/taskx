@@ -18,7 +18,13 @@ class FirestoreManager {
         .set(user.toJson());
   }
 
-  Future<UserEntity> getUser(String uid) async {
+  Future<bool> checkIfPersonExist(String uid) async {
+    final person =
+        await firestore.collection(FirestoreCollections.users).doc(uid).get();
+    return person.exists;
+  }
+
+  Future<UserModel> getUser(String uid) async {
     final userCollection =
         await firestore.collection(FirestoreCollections.users).doc(uid).get();
 

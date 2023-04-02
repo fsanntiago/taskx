@@ -32,6 +32,7 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
         email: user.email!.trim(),
         name: user.name!.trim(),
         uid: uid,
+        totalCategory: 0,
       );
       userCredential.user?.updateDisplayName(userModel.name);
 
@@ -92,17 +93,23 @@ class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
   Future<UserEntity> _getGoogleUser(UserCredential userCredential) async {
     late final UserModel userModel;
     final googleUser = userCredential.user!;
+    bool isExist = await firestoreManager.checkIfPersonExist(googleUser.uid);
 
-    // Google user to userModel
-    userModel = UserModel(
-      email: googleUser.email,
-      name: googleUser.displayName,
-      uid: googleUser.uid,
-      createdAt: DateTime.now().toUtc(),
-    );
+    if (isExist) {
+      userModel = await firestoreManager.getUser(googleUser.uid);
+    } else {
+      // Google user to userModel
+      userModel = UserModel(
+        email: googleUser.email,
+        name: googleUser.displayName,
+        uid: googleUser.uid,
+        createdAt: DateTime.now().toUtc(),
+        totalCategory: 0,
+      );
 
-    // Add Google user to firestore
-    await firestoreManager.addUser(userModel);
+      // Add Google user to firestore
+      await firestoreManager.addUser(userModel);
+    }
     return userModel;
   }
 
