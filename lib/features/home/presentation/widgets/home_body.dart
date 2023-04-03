@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:taskX/core/l10n/generated/l10n.dart';
 import 'package:taskX/features/credential/domain/entities/user_entity.dart';
-import 'package:taskX/features/home/presentation/widgets/card_widget.dart';
 import 'package:taskX/features/home/presentation/widgets/custom_title_widget.dart';
 
+import '../../../../core/widget/custom_card.dart';
 import 'card_list_widget.dart';
 import 'date_widget.dart';
 import 'home_custom_app_bar_widget.dart';
@@ -47,7 +46,7 @@ class HomeBody extends StatelessWidget {
             child: CardListWidget(
               width: 140,
               height: 120,
-              childItem: CardWidget(
+              childItem: CustomCard(
                 isClickable: false,
                 isCategory: true,
                 titleCategory: "31",
@@ -70,7 +69,7 @@ class HomeBody extends StatelessWidget {
             child: CardListWidget(
               width: 240,
               height: 160,
-              childItem: CardWidget(
+              childItem: CustomCard(
                 isClickable: false,
                 isCategory: false,
                 titleCategory: "31",
