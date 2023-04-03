@@ -8,8 +8,8 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/utils/constants.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({
+class CardWidget extends StatelessWidget {
+  const CardWidget({
     Key? key,
     required this.isClickable,
     required this.isCategory,
