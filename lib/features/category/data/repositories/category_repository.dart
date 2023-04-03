@@ -3,8 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:taskX/core/error/error_handler.dart';
 import 'package:taskX/core/error/failure.dart';
 import 'package:taskX/features/category/data/datasources/remote/base_remote_category_datasource.dart';
-import 'package:taskX/features/category/domain/entities/category_entity.dart';
 import 'package:taskX/features/category/domain/repositories/base_category_repository.dart';
+
+import '../../../../core/domain/entities/category/category_entity.dart';
 
 class CategoryRepository implements BaseCategoryRepository {
   final BaseRemoteCategoryDataSource remoteCategoryDataSource;

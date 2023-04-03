@@ -1,4 +1,4 @@
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+import '../../../../../core/domain/entities/user/entities/user_entity.dart';
 
 abstract class BaseRemoteCredentialDataSource {
   Future<UserEntity> signIn(UserEntity user);

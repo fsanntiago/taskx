@@ -1,10 +1,11 @@
 import 'package:taskX/core/error/error_handler.dart';
 import 'package:taskX/core/utils/app_boxes.dart';
 import 'package:taskX/features/credential/data/datasources/remote/base_remote_credential_datasource.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:taskX/features/credential/domain/repositories/base_credential_repository.dart';
+
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class CredentialRepository implements BaseCredentialRepository {
   final BaseRemoteCredentialDataSource remoteCredentialDataSource;

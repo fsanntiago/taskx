@@ -2,7 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 import 'package:taskX/features/credential/data/models/user_model.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 
 class FirestoreManager {
   final FirebaseFirestore firestore;

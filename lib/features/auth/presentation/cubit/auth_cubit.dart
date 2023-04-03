@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import 'package:taskX/features/auth/domain/usecases/get_current_user_usercase.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 part 'auth_state.dart';
 

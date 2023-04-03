@@ -2,10 +2,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/credential/domain/usecases/login_with_google_usecase.dart';
 import 'package:taskX/features/credential/domain/usecases/signin_usecase.dart';
 import 'package:taskX/features/credential/domain/usecases/signup_usecase.dart';
+
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 part 'credential_state.dart';
 

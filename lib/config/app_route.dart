@@ -5,7 +5,6 @@ import 'package:taskX/container_injector.dart';
 import 'package:taskX/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:taskX/features/category/presentation/cubit/category_cubit.dart';
 import 'package:taskX/features/category/presentation/screens/create_category_screen.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
 import 'package:taskX/features/credential/presentation/screens/choose_login_method_screen.dart';
 import 'package:taskX/features/credential/presentation/screens/sign_in_screen.dart';
@@ -13,6 +12,8 @@ import 'package:taskX/features/credential/presentation/screens/sign_up_screen.da
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 import 'package:taskX/features/home/presentation/screens/home_screen.dart';
 import 'package:taskX/features/task/presentation/screens/create_task_screen.dart';
+
+import '../core/domain/entities/user/entities/user_entity.dart';
 
 class Routes {
   Routes._();

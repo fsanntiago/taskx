@@ -7,7 +7,8 @@ import 'package:taskX/core/network/connectivity_checker.dart';
 import 'package:taskX/features/auth/data/datasources/local/base_local_auth_datasource.dart';
 import 'package:taskX/features/auth/data/datasources/remote/base_remote_auth_datasource.dart';
 import 'package:taskX/features/auth/domain/repositories/base_auth_repository.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class AuthRepository implements BaseAuthRepository {
   final BaseRemoteAuthDataSource remoteAuthDataSource;

@@ -7,7 +7,8 @@ import 'package:taskX/core/l10n/generated/l10n.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class HomeCustomAppBarWidget extends StatelessWidget {
   final UserEntity user;

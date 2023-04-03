@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+
+import '../domain/entities/user/entities/user_entity.dart';
 
 class AppBoxesName {
   AppBoxesName._();

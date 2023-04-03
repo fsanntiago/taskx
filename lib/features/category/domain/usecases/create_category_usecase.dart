@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
+import '../../../../core/domain/entities/category/category_entity.dart';
 import '../../../../core/error/failure.dart';
-import '../entities/category_entity.dart';
 import '../repositories/base_category_repository.dart';
 
 class CreateCategoryUseCase {

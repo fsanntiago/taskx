@@ -1,5 +1,6 @@
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   @override

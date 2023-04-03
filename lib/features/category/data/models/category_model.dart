@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/entities/category_entity.dart';
+import '../../../../core/domain/entities/category/category_entity.dart';
 
 class CategoryModel extends CategoryEntity {
   @override

@@ -4,16 +4,26 @@ import 'package:taskX/core/utils/app_colors.dart';
 
 class CustomHeader extends StatelessWidget {
   final String title;
+  final String? subtitle;
 
-  const CustomHeader({super.key, required this.title});
+  const CustomHeader({super.key, required this.title, this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: AppTextStyles.applicationTitle(
-        color: AppColors.blackColor,
-      ),
+    return Column(
+      children: [
+        Text(
+          title,
+          style: AppTextStyles.applicationTitle(
+            color: AppColors.blackColor,
+          ),
+        ),
+        subtitle != null
+            ? Text(
+                subtitle!,
+              )
+            : Container(),
+      ],
     );
   }
 }

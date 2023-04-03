@@ -6,10 +6,9 @@ import 'package:taskX/config/app_route.dart';
 import 'package:taskX/core/text_styles.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 import 'package:taskX/features/home/presentation/widgets/home_bottom_nav_bar.dart';
-
+import '../../../../core/domain/entities/user/entities/user_entity.dart';
 import '../widgets/home_body.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -96,6 +95,7 @@ class HomeScreen extends StatelessWidget {
         return HomeBody(user: user);
       case 1:
       case 2:
+
       case 3:
       default:
         return HomeBody(user: user);

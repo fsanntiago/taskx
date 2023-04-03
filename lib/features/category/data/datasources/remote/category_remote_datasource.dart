@@ -5,9 +5,9 @@ import 'package:taskX/core/error/exceptions.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
 import 'package:taskX/features/category/data/models/category_model.dart';
-import 'package:taskX/features/category/domain/entities/category_entity.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../core/domain/entities/category/category_entity.dart';
 import 'base_remote_category_datasource.dart';
 
 class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:taskX/core/firebase/firestore_manager.dart';
 import 'package:taskX/features/auth/data/datasources/remote/base_remote_auth_datasource.dart';
-import 'package:taskX/features/credential/domain/entities/user_entity.dart';
+import '../../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class RemoteAuthDataSource implements BaseRemoteAuthDataSource {
   final FirebaseAuth firebaseAuth;
