@@ -49,8 +49,8 @@ class _DateWidgetState extends State<DateWidget> {
           height: 80,
           locale: _currentLocale,
           initialSelectedDate: DateTime.now(),
-          selectionColor: AppColors.primaryColor,
-          selectedTextColor: AppColors.lightShapeColor,
+          selectionColor: AppColors.darkBlueColor,
+          selectedTextColor: AppColors.whiteColor,
           daysCount: 10,
           onDateChange: (selectedDate) {
             _getDay(selectedDate);
@@ -74,7 +74,7 @@ class _DateWidgetState extends State<DateWidget> {
               // timeFormat: Localizations.localeOf(context).languageCode,
               timeIntervalHeight: 76,
             ),
-            todayHighlightColor: AppColors.primaryColor,
+            todayHighlightColor: AppColors.darkBlueColor,
             allowViewNavigation: false,
             viewNavigationMode: ViewNavigationMode.none,
             viewHeaderHeight: 0,

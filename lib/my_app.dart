@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           "/": (context) {
             return BlocListener<AuthCubit, AuthState>(
               listener: (context, authState) {
-                if (authState is AuthSuccessfully) {
+                if (authState is AuthSuccessfully && authState.user != null) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     Routes.home,
                     (route) => false,

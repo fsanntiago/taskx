@@ -17,4 +17,6 @@ class ErrorMessages {
   static const String signInGoogleCanceled =
       "The user canceled the sign-in flow.";
   static const String missingGoogleIdToken = "Missing Google ID Token.";
+  static const String limitCategory =
+      "You cannot create any more categories. You already have the limit of 5 categories created";
 }

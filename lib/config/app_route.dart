@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:taskX/container_injector.dart';
 import 'package:taskX/features/auth/presentation/screens/welcome_screen.dart';
+import 'package:taskX/features/category/presentation/cubit/category_cubit.dart';
+import 'package:taskX/features/category/presentation/screens/create_category_screen.dart';
 import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 import 'package:taskX/features/credential/presentation/cubit/credential_cubit.dart';
 import 'package:taskX/features/credential/presentation/screens/choose_login_method_screen.dart';
@@ -10,6 +12,7 @@ import 'package:taskX/features/credential/presentation/screens/sign_in_screen.da
 import 'package:taskX/features/credential/presentation/screens/sign_up_screen.dart';
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 import 'package:taskX/features/home/presentation/screens/home_screen.dart';
+import 'package:taskX/features/task/presentation/screens/create_task_screen.dart';
 
 class Routes {
   Routes._();
@@ -18,6 +21,8 @@ class Routes {
   static const String signUp = "/signUp";
   static const String home = "/home";
   static const String signIn = "/signIn";
+  static const String createTask = "/createTask";
+  static const String createCategory = "/createCategory";
 }
 
 class AppRouter {
@@ -67,6 +72,20 @@ class AppRouter {
             child: HomeScreen(user: args as UserEntity),
           ),
         );
+
+      case Routes.createTask:
+        return MaterialPageRoute(
+          builder: (context) => const CreateTaskScreen(),
+        );
+
+      case Routes.createCategory:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<CategoryCubit>(
+            create: (context) => sl<CategoryCubit>()..isInCategoryLimit(),
+            child: const CreateCategoryScreen(),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const NoRouteFound(),

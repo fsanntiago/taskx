@@ -16,4 +16,7 @@ class ScreenModuleChanged extends HomeState {
   const ScreenModuleChanged({
     required this.index,
   });
+
+  @override
+  List<Object> get props => [index];
 }

@@ -4,6 +4,7 @@ class FontSize {
   static const double light = 8.0;
   static const double details = 10.0;
   static const double body = 12.0;
+  static const double floatingButton = 14.0;
   static const double boxTitle = 16.0;
   static const double subTitle = 18.0;
   static const double title = 22.0;

@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
+import 'package:taskX/core/network/connectivity_checker.dart';
 import 'package:taskX/features/auth/auth_injector.dart';
+import 'package:taskX/features/category/category_injector.dart';
 import 'package:taskX/features/credential/credential_injector.dart';
 import 'package:taskX/features/home/home_injector.dart';
 
@@ -14,6 +18,7 @@ Future<void> initApp() async {
   initAuth();
   initCredential();
   initHome();
+  initCategory();
 }
 
 void _initCore() {
@@ -22,6 +27,14 @@ void _initCore() {
     () => FirestoreManager(
       firestore: sl(),
     ),
+  );
+
+  // add connectivity
+  sl.registerLazySingleton<Connectivity>(() => Connectivity());
+
+  // add checkInternetConnectivity
+  sl.registerLazySingleton<BaseCheckInternetConnectivity>(
+    () => CheckInternetConnectivity(connectivity: sl()),
   );
 }
 

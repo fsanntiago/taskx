@@ -12,7 +12,7 @@ import 'package:taskX/features/credential/domain/entities/user_entity.dart';
 class AuthRepository implements BaseAuthRepository {
   final BaseRemoteAuthDataSource remoteAuthDataSource;
   final BaseLocalAuthDataSource localAuthDataSource;
-  final CheckInternetConnectivity checkInternetConnectivity;
+  final BaseCheckInternetConnectivity checkInternetConnectivity;
 
   AuthRepository({
     required this.remoteAuthDataSource,

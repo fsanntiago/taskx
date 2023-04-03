@@ -4,26 +4,40 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 
-class HomeBottomNavBar extends StatelessWidget {
+class HomeBottomNavBar extends StatefulWidget {
   const HomeBottomNavBar({super.key});
 
   @override
+  State<HomeBottomNavBar> createState() => _HomeBottomNavBarState();
+}
+
+class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
+  int indexSelected = 0;
+
+  @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        _bottomNavigationIcon(Feather.grid, "Home"),
-        _bottomNavigationIcon(Feather.file_text, "Tasks"),
-        _bottomNavigationIcon(Feather.plus_square, "Add Tasks"),
-        _bottomNavigationIcon(Icons.calendar_month_outlined, "Calender"),
-        _bottomNavigationIcon(Feather.user, "Profile"),
-      ],
-      onTap: (index) {
-        context.read<HomeCubit>().changeScreenModule(index: index);
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return BottomNavigationBar(
+          currentIndex: indexSelected,
+          items: [
+            _bottomNavigationIcon(Feather.grid, "Home"),
+            _bottomNavigationIcon(Icons.calendar_month_outlined, "Calender"),
+            _bottomNavigationIcon(Feather.file_text, "Tasks"),
+            _bottomNavigationIcon(Feather.user, "Profile"),
+          ],
+          onTap: (index) {
+            setState(() {
+              indexSelected = index;
+            });
+            context.read<HomeCubit>().changeScreenModule(index: index);
+          },
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: AppColors.whiteColor,
+        );
       },
-      type: BottomNavigationBarType.fixed,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      backgroundColor: AppColors.whiteColor,
     );
   }
 

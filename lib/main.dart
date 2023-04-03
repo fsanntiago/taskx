@@ -10,9 +10,9 @@ import 'my_app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await LocalStorage.init();
 
   await initApp();
+  await LocalStorage.init();
 
   Bloc.observer = MyBlocObserver();
 

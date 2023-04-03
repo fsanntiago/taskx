@@ -62,6 +62,15 @@ class AppTextStyles {
     );
   }
 
+  static TextStyle subTitleBold({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.subTitle,
+      fontWeight: FontThickness.bold,
+      letterSpacing: LetterSpacingCustom.letterSpacing,
+    );
+  }
+
   static TextStyle textRegular({Color? color}) {
     return _setStyle(
       color: color,
@@ -121,6 +130,15 @@ class AppTextStyles {
       color: color,
       fontSize: FontSize.boxTitle,
       fontWeight: FontThickness.medium,
+      letterSpacing: LetterSpacingCustom.letterSpacing,
+    );
+  }
+
+  static TextStyle floatingButtonText({Color? color}) {
+    return _setStyle(
+      color: color,
+      fontSize: FontSize.floatingButton,
+      fontWeight: FontThickness.bold,
       letterSpacing: LetterSpacingCustom.letterSpacing,
     );
   }

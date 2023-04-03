@@ -16,6 +16,8 @@ class ErrorHandler {
       failure = const Failure(ErrorMessages.networkConnectionFailed);
     } else if (error is NoInternetConnectionException) {
       failure = const Failure(ErrorMessages.networkConnectionFailed);
+    } else if (error is LimitCategoryException) {
+      failure = const Failure(ErrorMessages.limitCategory);
     } else {
       failure = const Failure(ErrorMessages.unexpectedError);
     }

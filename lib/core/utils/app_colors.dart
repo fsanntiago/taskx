@@ -38,9 +38,20 @@ class AppColors {
   static const Color accentGreen = Color(0xffDCFEE4);
   static const Color green = Color(0xff14FF00);
   static const Color accentRed = Color(0xffFEDCDC);
-  static const Color red = Color(0xffFF0E00);
+  static const Color red = Color(0xfffc0303);
   static const Color accentPurple = Color(0xffEBDCFE);
-  static const Color purple = Color(0xff5200FF);
+  static const Color purple = Color(0xffc800ff);
   static const Color accentOrange = Color(0xffFEF2DC);
-  static const Color orange = Color(0xffFF9900);
+  static const Color orange = Color(0xffff7b00);
+  static const Color yellow = Color(0xfffcba03);
+  static const Color blue = Color(0xff0088ff);
+
+  static const Map<int, Color> colorsTask = {
+    0: green,
+    1: red,
+    2: blue,
+    3: yellow,
+    4: purple,
+    5: orange,
+  };
 }

@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 
 import 'package:taskX/core/functions/random_emoji.dart';
 import 'package:taskX/core/l10n/generated/l10n.dart';
@@ -32,16 +30,23 @@ class HomeCustomAppBarWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   IntlStrings.of(context).greeting(
-                    user.name!.capitalize(),
+                    user.name!.substring(0, user.name!.indexOf(" ")),
                   ),
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
-                Text(
-                  emoji,
-                  style: const TextStyle(fontSize: FontSize.subTitle),
+                Container(
+                  padding: const EdgeInsets.only(bottom: 2.6),
+                  child: Text(
+                    emoji,
+                    style: const TextStyle(
+                      fontSize: FontSize.boxTitle,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),

@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await getCurrentUserUserCase.call();
     result.fold(
       (left) => emit(AuthFailed()),
-      (right) => emit(AuthSuccessfully(user: right!)),
+      (right) => emit(AuthSuccessfully(user: right)),
     );
   }
 }
