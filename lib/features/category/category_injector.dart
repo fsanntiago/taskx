@@ -1,3 +1,5 @@
+import 'package:taskX/features/category/data/datasources/local/base_local_category_datasource.dart';
+import 'package:taskX/features/category/data/datasources/local/category_local_datasource.dart';
 import 'package:taskX/features/category/domain/usecases/is_in_categories_limit_usecase.dart';
 
 import '../../container_injector.dart';
@@ -32,14 +34,18 @@ void initCategory() {
   // Repositories
   sl.registerLazySingleton<BaseCategoryRepository>(
     () => CategoryRepository(
+      localCategoryDataSource: sl(),
+      checkInternetConnectivity: sl(),
       remoteCategoryDataSource: sl(),
     ),
   );
 
   // Local data sources
+  sl.registerLazySingleton<BaseLocalCategoryDataSource>(
+    () => CategoryLocalDataSource(),
+  );
 
   // Remote data sources
-
   sl.registerLazySingleton<BaseRemoteCategoryDataSource>(
     () => CategoryRemoteDataSource(
       firebaseFirestore: sl(),

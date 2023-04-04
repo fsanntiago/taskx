@@ -16,7 +16,7 @@ class UserModel extends UserEntity {
   final String? email;
 
   @override
-  final int? totalCategory;
+  int? totalCategory;
 
   UserModel({
     this.uid,
