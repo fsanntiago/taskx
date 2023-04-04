@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskX/features/category/data/models/category_model.dart';
 
+import '../../../../core/models/category/category_model.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/constants.dart';
 import '../../../../core/widget/custom_form_field.dart';

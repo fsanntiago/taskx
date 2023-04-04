@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
-import 'package:taskX/features/category/data/models/category_model.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/domain/entities/category/category_entity.dart';
+import '../../../../../core/models/category/category_model.dart';
 import 'base_remote_category_datasource.dart';
 
 class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
