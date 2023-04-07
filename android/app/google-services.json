@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "603354457355",
-    "project_id": "taskx-app-78c3f",
-    "storage_bucket": "taskx-app-78c3f.appspot.com"
+    "project_number": "893503442186",
+    "project_id": "taskx-app-dev",
+    "storage_bucket": "taskx-app-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:603354457355:android:e65a3002841abb6aaa2e0e",
+        "mobilesdk_app_id": "1:893503442186:android:aa69ca3f49c107c287bef3",
         "android_client_info": {
-          "package_name": "com.example.taskx"
+          "package_name": "com.taskx.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "603354457355-jcfccsg5o2iebism8ed0vv5nl78lc6tf.apps.googleusercontent.com",
+          "client_id": "893503442186-u9dfkte7vo53f4rm5plf0m1d9cikrt8g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCHXRD-Nd2HiFWU0XkqmABD7yPBifO3PJw"
+          "current_key": "AIzaSyDQ9IW8qw2LnN8h5wIQ6dbsDeaLXpGDWJA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "603354457355-jcfccsg5o2iebism8ed0vv5nl78lc6tf.apps.googleusercontent.com",
+              "client_id": "893503442186-u9dfkte7vo53f4rm5plf0m1d9cikrt8g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
