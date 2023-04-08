@@ -19,6 +19,8 @@ class CategoryEntity extends HiveObject with EquatableMixin {
   final int? color;
   @HiveField(6)
   final DateTime? updateAt;
+  @HiveField(7)
+  final bool? isDeleted;
 
   CategoryEntity({
     this.uid,
@@ -28,6 +30,7 @@ class CategoryEntity extends HiveObject with EquatableMixin {
     this.description,
     this.icon,
     this.updateAt,
+    this.isDeleted,
   });
 
   @override
@@ -39,5 +42,6 @@ class CategoryEntity extends HiveObject with EquatableMixin {
         description,
         icon,
         updateAt,
+        isDeleted,
       ];
 }

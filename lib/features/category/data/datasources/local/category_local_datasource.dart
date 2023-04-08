@@ -22,15 +22,14 @@ class CategoryLocalDataSource implements BaseLocalCategoryDataSource {
   }
 
   @override
-  bool? isInCategoriesLimit() {
+  bool isInCategoriesLimit() {
     final userBox = AppBoxes.userBox;
     final user = userBox.get(AppBoxesKeys.user);
 
     /* 
       Check if it is not extrapolating the limit of categories that the user 
       can have 
-      */
-
+    */
     if (user!.totalCategory! >= 5) {
       return true;
     } else {

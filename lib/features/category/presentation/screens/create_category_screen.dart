@@ -27,10 +27,13 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         if (state is CheckCategoryLimitSuccess &&
             state.isInCategoryLimit == true) {
           buildAlertDialog(context, _onCategoryLimitReached(context));
-        }
-        if (state is CheckCategoryLimitFailed) {
+        } else if (state is CheckCategoryLimitFailed) {
           Navigator.of(context).pop();
-
+          buildToast(msg: state.message);
+        }
+        if (state is CategoryCreatingSuccess) {
+          Navigator.of(context).pop();
+        } else if (state is CategoryCreatingFailure) {
           buildToast(msg: state.message);
         }
       },
