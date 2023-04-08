@@ -25,12 +25,12 @@ class CredentialCubit extends Cubit<CredentialState> {
     emit(CredentialSignUpLoading());
     final result = await signUpUseCase.call(user);
     result.fold(
-        (failure) => emit(CredentialLoginError(message: failure.message)),
-        (success) => emit(CredentialLoginSuccess(user: success)));
+        (failure) => emit(CredentialSignUpError(message: failure.message)),
+        (success) => emit(CredentialSignUpSuccess(user: success)));
   }
 
   Future<void> signIn({required UserEntity user}) async {
-    emit(CredentialSignUpLoading());
+    emit(CredentialLoginLoading());
     final result = await signInUseCase.call(user);
     result.fold(
         (failure) => emit(CredentialLoginError(message: failure.message)),

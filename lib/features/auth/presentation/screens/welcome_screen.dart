@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:taskX/config/app_route.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../config/app_route.dart';
 import '../../../../core/utils/app_assets_images.dart';
 import '../../../../core/widget/custom_button.dart';
 
@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    top: 24,
+                    top: 30,
                     left: 16,
                     right: 16,
                     bottom: 20,
@@ -47,45 +47,56 @@ class WelcomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: const TextSpan(
-                            style: TextStyle(
-                              fontSize: FontSize.titleStartScreen,
-                              color: AppColors.whiteColor,
-                              fontWeight: FontThickness.bold,
-                              letterSpacing: LetterSpacingCustom.letterSpacing,
-                            ),
-                            text: "Your Daily ",
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: "Tasks ",
-                                style: TextStyle(
-                                  color: AppColors.secondaryColor,
-                                ),
+                      Expanded(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: const TextSpan(
+                              style: TextStyle(
+                                fontSize: FontSize.titleStartScreen,
+                                color: AppColors.whiteColor,
+                                fontWeight: FontThickness.bold,
+                                letterSpacing:
+                                    LetterSpacingCustom.letterSpacing,
                               ),
-                              TextSpan(text: "Management"),
-                            ]),
+                              text: "Your Daily ",
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: "Tasks ",
+                                  style: TextStyle(
+                                    color: AppColors.secondaryColor,
+                                  ),
+                                ),
+                                TextSpan(text: "Management"),
+                              ]),
+                        ),
                       ),
                       sizeVer(20),
-                      const Text(
-                        "Manage your own projects super easy. You can do scheduling, reminders, todo list and more.",
-                        style: TextStyle(
-                          fontSize: FontSize.subTitle,
-                          color: AppColors.whiteColor,
-                          fontWeight: FontThickness.light,
-                          letterSpacing: LetterSpacingCustom.letterSpacing,
+                      const Expanded(
+                        child: Text(
+                          "Manage your own projects super easy. You can do scheduling, reminders, todo list and more.",
+                          style: TextStyle(
+                            fontSize: FontSize.subTitle,
+                            color: AppColors.whiteColor,
+                            fontWeight: FontThickness.light,
+                            letterSpacing: LetterSpacingCustom.letterSpacing,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                      sizeVer(16),
-                      CustomButton(
-                        text: "Get started",
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(Routes.chooseLoginMethod);
-                        },
+                      // sizeVer(16),
+                      SizedBox(
+                        height: 50,
+                        child: Expanded(
+                          child: CustomButton(
+                            text: "Get started",
+                            onPressed: () {
+                              Navigator.of(context).pushReplacementNamed(
+                                  Routes.chooseLoginMethod);
+                            },
+                          ),
+                        ),
                       ),
+                      sizeVer(50),
                     ],
                   ),
                 ),
