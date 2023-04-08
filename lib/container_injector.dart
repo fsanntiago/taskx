@@ -63,7 +63,8 @@ void _initFirebase() async {
     var firestoreInstance = FirebaseFirestore.instance;
     // Use firestore emulator - localhost
     firestoreInstance.useFirestoreEmulator("127.0.0.1", 8080);
-    firestoreInstance.settings = const Settings(sslEnabled: false);
+    firestoreInstance.settings =
+        const Settings(sslEnabled: false, persistenceEnabled: false);
     return firestoreInstance;
   });
 }
