@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    top: 30,
+                    top: 40,
                     left: 16,
                     right: 16,
                     bottom: 20,
@@ -51,26 +51,26 @@ class WelcomeScreen extends StatelessWidget {
                         child: RichText(
                           textAlign: TextAlign.center,
                           text: const TextSpan(
-                              style: TextStyle(
-                                fontSize: FontSize.titleStartScreen,
-                                color: AppColors.whiteColor,
-                                fontWeight: FontThickness.bold,
-                                letterSpacing:
-                                    LetterSpacingCustom.letterSpacing,
-                              ),
-                              text: "Your Daily ",
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: "Tasks ",
-                                  style: TextStyle(
-                                    color: AppColors.secondaryColor,
-                                  ),
+                            style: TextStyle(
+                              fontSize: FontSize.titleStartScreen,
+                              color: AppColors.whiteColor,
+                              fontWeight: FontThickness.bold,
+                              letterSpacing: LetterSpacingCustom.letterSpacing,
+                            ),
+                            text: "Your Daily ",
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: "Tasks ",
+                                style: TextStyle(
+                                  color: AppColors.secondaryColor,
                                 ),
-                                TextSpan(text: "Management"),
-                              ]),
+                              ),
+                              TextSpan(text: "Management"),
+                            ],
+                          ),
                         ),
                       ),
-                      sizeVer(20),
+                      sizeVer(25),
                       const Expanded(
                         child: Text(
                           "Manage your own projects super easy. You can do scheduling, reminders, todo list and more.",
@@ -84,9 +84,9 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                       // sizeVer(16),
-                      SizedBox(
-                        height: 50,
-                        child: Expanded(
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
                           child: CustomButton(
                             text: "Get started",
                             onPressed: () {
@@ -96,7 +96,7 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      sizeVer(50),
+                      sizeVer(30),
                     ],
                   ),
                 ),
