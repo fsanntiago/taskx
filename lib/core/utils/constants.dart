@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taskX/core/utils/icons_category.dart';
+
+import 'app_assets_images.dart';
 
 Widget sizeVer(double height) {
   return SizedBox(
@@ -13,26 +14,14 @@ Widget sizeHor(double width) {
   );
 }
 
-const Map<int, String> iconsTaskBlack = {
-  0: IconsCategory.briefcaseIconBlack,
-  1: IconsCategory.programmingIconBlack,
-  2: IconsCategory.shoppingIconBlack,
-  3: IconsCategory.userIconBlack,
-  4: IconsCategory.musicIconBlack,
-  5: IconsCategory.gameIconBlack,
-  6: IconsCategory.hammerIconBlack,
-  7: IconsCategory.newsIconBlack,
-  8: IconsCategory.videoCameraIconBlack,
-};
-
-const Map<int, String> iconsTaskWhite = {
-  0: IconsCategory.briefcaseIconWhite,
-  1: IconsCategory.programmingIconWhite,
-  2: IconsCategory.shoppingIconWhite,
-  3: IconsCategory.userIconWhite,
-  4: IconsCategory.musicIconWhite,
-  5: IconsCategory.gameIconWhite,
-  6: IconsCategory.hammerIconWhite,
-  7: IconsCategory.newsIconWhite,
-  8: IconsCategory.videoCameraIconWhite,
+const Map<int, String> iconsCategory = {
+  0: AppImages.briefcaseIcon,
+  1: AppImages.codeIcon,
+  2: AppImages.shoppingCartIcon,
+  3: AppImages.userIcon,
+  4: AppImages.musicalNotesIcon,
+  5: AppImages.controllerIcon,
+  6: AppImages.drillIcon,
+  7: AppImages.newsIcon,
+  8: AppImages.cameraIcon,
 };

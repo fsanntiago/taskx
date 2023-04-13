@@ -46,7 +46,7 @@ class AppColors {
   static const Color yellow = Color(0xfffcba03);
   static const Color blue = Color(0xff0088ff);
 
-  static const Map<int, Color> colorsTask = {
+  static const Map<int, Color> ColorsTasksAndCategories = {
     0: green,
     1: red,
     2: blue,

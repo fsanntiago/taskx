@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:taskX/config/app_route.dart';
 import 'package:taskX/core/functions/build_alert_dialog.dart';
 import 'package:taskX/core/functions/build_toast.dart';
 import 'package:taskX/core/text_styles.dart';
@@ -32,7 +33,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
           buildToast(msg: state.message);
         }
         if (state is CategoryCreatingSuccess) {
-          Navigator.of(context).pop();
+          Navigator.of(context).popAndPushNamed(Routes.categories);
         } else if (state is CategoryCreatingFailure) {
           buildToast(msg: state.message);
         }

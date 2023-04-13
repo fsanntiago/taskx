@@ -69,6 +69,7 @@ flutter:
   assets:
     - firebase.json
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: Metropolis

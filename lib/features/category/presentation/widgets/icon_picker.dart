@@ -52,7 +52,7 @@ class _IconPickerState extends State<IconPicker> {
             crossAxisSpacing: 5,
             mainAxisSpacing: 3.5,
           ),
-          itemCount: iconsTaskBlack.length,
+          itemCount: iconsCategory.length,
           itemBuilder: (context, index) {
             return InkWell(
               borderRadius: BorderRadius.circular(50),
@@ -75,10 +75,11 @@ class _IconPickerState extends State<IconPicker> {
                   padding: const EdgeInsets.all(6),
                   child: Image.memory(
                     convertBase64Image(
-                      _selectedItem == index
-                          ? iconsTaskWhite[index]!
-                          : iconsTaskBlack[index]!,
+                      iconsCategory[index]!,
                     ),
+                    color: _selectedItem == index
+                        ? AppColors.whiteColor
+                        : AppColors.blackColor,
                     gaplessPlayback: true,
                   ),
                 ),
