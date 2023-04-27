@@ -26,6 +26,7 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   Future<void> isInCategoryLimit() async {
     final result = await isInCategoriesLimitUseCase.call();
+    print(result);
     result.fold(
       (failure) => emit(
         CheckCategoryLimitFailed(message: failure.message),

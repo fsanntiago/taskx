@@ -15,6 +15,8 @@ class UserEntity extends HiveObject with EquatableMixin {
   final String? email;
   @HiveField(4, defaultValue: 0)
   int? totalCategory;
+  @HiveField(5)
+  final String? plan;
 
   // will not going to store in DB
   // final File? imageFile;
@@ -29,6 +31,7 @@ class UserEntity extends HiveObject with EquatableMixin {
     this.password,
     this.otherUid,
     this.totalCategory,
+    this.plan,
   });
 
   @override
@@ -40,5 +43,6 @@ class UserEntity extends HiveObject with EquatableMixin {
         password,
         otherUid,
         totalCategory,
+        plan,
       ];
 }

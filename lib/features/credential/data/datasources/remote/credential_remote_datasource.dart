@@ -5,8 +5,8 @@ import 'package:taskX/core/error/error_codes.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
 import 'package:taskX/features/credential/data/datasources/remote/base_remote_credential_datasource.dart';
 
-import 'package:taskX/features/credential/data/models/user_model.dart';
 import '../../../../../core/domain/entities/user/entities/user_entity.dart';
+import '../../../../../core/models/user/user_model.dart';
 
 class RemoteCredentialDataSource implements BaseRemoteCredentialDataSource {
   final FirebaseAuth firebaseAuth;

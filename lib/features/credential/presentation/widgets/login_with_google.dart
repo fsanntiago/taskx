@@ -29,9 +29,9 @@ class LoginWithGoogle extends StatelessWidget {
         fixedSize: const MaterialStatePropertyAll(
           Size.fromHeight(50),
         ),
-        elevation: const MaterialStatePropertyAll(12),
+        elevation: const MaterialStatePropertyAll(6),
         shadowColor: MaterialStatePropertyAll(
-          AppColors.googleButton.withOpacity(0.6),
+          AppColors.googleButton.withOpacity(0.4),
         ),
         backgroundColor: const MaterialStatePropertyAll(AppColors.googleButton),
       ),

@@ -7,12 +7,16 @@ import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
 
 class CustomTitleWidget extends StatelessWidget {
-  const CustomTitleWidget({
+  CustomTitleWidget({
     Key? key,
     required this.title,
+    this.viewAll,
+    required this.onTap,
   }) : super(key: key);
 
   final String title;
+  bool? viewAll;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +29,24 @@ class CustomTitleWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         GestureDetector(
-          child: Row(
-            children: [
-              Text(
-                IntlStrings.of(context).viewAll,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              sizeHor(3),
-              const Icon(
-                Ionicons.ios_arrow_forward,
-                size: FontSize.light,
-                color: AppColors.lightMainTextColor,
-              ),
-            ],
+          child: InkWell(
+            onTap: onTap,
+            child: Row(
+              children: [
+                viewAll != false
+                    ? Text(
+                        IntlStrings.of(context).viewAll,
+                        style: Theme.of(context).textTheme.displaySmall,
+                      )
+                    : Container(),
+                sizeHor(3),
+                const Icon(
+                  Ionicons.ios_arrow_forward,
+                  size: FontSize.light,
+                  color: AppColors.lightMainTextColor,
+                ),
+              ],
+            ),
           ),
         ),
       ],

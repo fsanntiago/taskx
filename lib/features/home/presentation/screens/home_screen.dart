@@ -7,9 +7,11 @@ import 'package:taskX/core/text_styles.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
-import 'package:taskX/features/home/presentation/widgets/home_bottom_nav_bar.dart';
+import 'package:taskX/features/home/presentation/widgets/category/categories_builder.dart';
+
 import '../../../../core/domain/entities/user/entities/user_entity.dart';
-import '../widgets/home_body.dart';
+import '../widgets/home/home_body.dart';
+import '../widgets/home/home_bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   final UserEntity user;
@@ -93,9 +95,10 @@ class HomeScreen extends StatelessWidget {
     switch (index) {
       case 0:
         return HomeBody(user: user);
+
       case 1:
       case 2:
-
+        return const CategoriesBuilder();
       case 3:
       default:
         return HomeBody(user: user);

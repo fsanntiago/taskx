@@ -91,6 +91,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 return const CircularProgressIndicator();
               } else {
                 return CustomButton(
+                  isDisable: _isSigningUp == true ? true : false,
                   text: "Get Started",
                   onPressed: () {
                     _signUpUser();

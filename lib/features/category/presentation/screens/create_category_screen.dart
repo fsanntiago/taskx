@@ -27,10 +27,14 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
         if (state is CheckCategoryLimitSuccess &&
             state.isInCategoryLimit == true) {
           buildAlertDialog(context, _onCategoryLimitReached(context));
-        }
-        if (state is CheckCategoryLimitFailed) {
+        } else if (state is CheckCategoryLimitFailed) {
           Navigator.of(context).pop();
-
+          buildToast(msg: state.message);
+        }
+        if (state is CategoryCreatingSuccess) {
+          Navigator.pop(context);
+        } else if (state is CategoryCreatingFailure) {
+          Navigator.of(context).pop();
           buildToast(msg: state.message);
         }
       },
@@ -104,6 +108,11 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
+                context.read<CategoryCubit>().emit(
+                      const CheckCategoryLimitSuccess(
+                        isInCategoryLimit: false,
+                      ),
+                    );
               },
               buttonColor: const Color(0xffFFC000),
               shadowColor: const Color(0xffFFC000),

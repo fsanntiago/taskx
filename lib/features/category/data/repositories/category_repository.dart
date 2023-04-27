@@ -10,6 +10,7 @@ import 'package:taskX/features/category/data/datasources/remote/base_remote_cate
 import 'package:taskX/features/category/domain/repositories/base_category_repository.dart';
 
 import '../../../../core/domain/entities/category/category_entity.dart';
+import '../../../../core/utils/app_boxes.dart';
 
 class CategoryRepository implements BaseCategoryRepository {
   final BaseRemoteCategoryDataSource remoteCategoryDataSource;
@@ -29,13 +30,18 @@ class CategoryRepository implements BaseCategoryRepository {
     try {
       if (await checkInternetConnectivity.isConnected()) {
         final result = await remoteCategoryDataSource.createCategory(category);
+        AppBoxes.categoryBox.add(result);
+
+        final userBox = AppBoxes.userBox.get(AppBoxesKeys.user);
+        userBox!.totalCategory = userBox.totalCategory! + 1;
+        userBox.save();
+
         return Right(result);
       } else {
         final result = localCategoryDataSource.createCategory(category);
         if (result == null) {
           return const Left(Failure(ErrorMessages.networkConnectionFailed));
         }
-
         return Right(result);
       }
     } catch (e) {
@@ -48,13 +54,30 @@ class CategoryRepository implements BaseCategoryRepository {
     try {
       if (await checkInternetConnectivity.isConnected()) {
         final result = await remoteCategoryDataSource.isInCategoriesLimit();
+
         return Right(result);
       } else {
         final result = localCategoryDataSource.isInCategoriesLimit();
-        return Right(result!);
+
+        return Right(result);
       }
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CategoryEntity>>> loadCategories() async {
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final categories = await remoteCategoryDataSource.loadCategories();
+        return Right(categories);
+      } catch (e) {
+        return Left(ErrorHandler.handle(e).failure);
+      }
+    } else {
+      final user = localCategoryDataSource.loadCategories();
+      return Right(user);
     }
   }
 }

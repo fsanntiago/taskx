@@ -35,15 +35,15 @@ class CustomButton extends StatelessWidget {
       onPressed: isDisable == true ? null : onPressed,
       style: ButtonStyle(
         fixedSize: MaterialStatePropertyAll(Size.fromHeight(height ?? 50)),
-        elevation: const MaterialStatePropertyAll(12),
+        elevation: const MaterialStatePropertyAll(6),
         shadowColor: MaterialStatePropertyAll(
           shadowColor != null
               ? isDisable == true
                   ? shadowColor!.withOpacity(0.3)
-                  : shadowColor!.withOpacity(0.6)
+                  : shadowColor!.withOpacity(0.4)
               : isDisable == true
                   ? AppColors.shadowBlueButtonColor.withOpacity(0.3)
-                  : AppColors.shadowBlueButtonColor.withOpacity(0.6),
+                  : AppColors.shadowBlueButtonColor.withOpacity(0.4),
         ),
         backgroundColor: MaterialStatePropertyAll(
           isDisable == true

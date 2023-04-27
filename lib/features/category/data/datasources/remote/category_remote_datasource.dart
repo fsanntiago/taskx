@@ -3,10 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
+import 'package:taskX/core/utils/app_boxes.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/domain/entities/category/category_entity.dart';
 import '../../../../../core/models/category/category_model.dart';
+import '../../../../../core/models/user/user_model.dart';
 import 'base_remote_category_datasource.dart';
 
 class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
@@ -24,7 +26,7 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
   Future<CategoryEntity> createCategory(CategoryEntity category) async {
     try {
       final User user = firebaseAuth.currentUser!;
-      final person = await firestoreManager.getUser(user.uid);
+      final UserModel person = await firestoreManager.getUser(user.uid);
 
       final userRef = firebaseFirestore
           .collection(FirestoreCollections.users)
@@ -35,6 +37,7 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
       final CategoryModel categoryModel = CategoryModel(
         description: category.description,
         color: category.color,
+        isDeleted: false,
         createdAt: category.createdAt,
         icon: category.icon,
         name: category.name,
@@ -47,6 +50,7 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
           .doc(categoryModel.uid)
           .set(categoryModel.toJson());
       await userRef.update({"totalCategory": person.totalCategory! + 1});
+
       return categoryModel.copyWith();
     } catch (e) {
       rethrow;
@@ -55,28 +59,12 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
 
   @override
   Future<bool> isInCategoriesLimit() async {
-    int? totalCategory;
-
     try {
       final User user = firebaseAuth.currentUser!;
-      final person = await firestoreManager.getUser(user.uid);
 
-      final userRef = firebaseFirestore
-          .collection(FirestoreCollections.users)
-          .doc(person.uid);
-
-      // Get totalCategory of current user
-      await userRef.get().then(
-        (value) {
-          totalCategory = value.data()!['totalCategory'];
-        },
-      );
-
-      /* 
-      Check if it is not extrapolating the limit of categories that the user 
-      can have 
-      */
-      if (totalCategory! >= 5) {
+      final countCategories =
+          await firestoreManager.getCountCategories(user.uid);
+      if (countCategories >= 5) {
         return true;
       } else {
         return false;
@@ -84,5 +72,36 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<List<CategoryEntity>> loadCategories() async {
+    await AppBoxes.categoryBox.clear();
+    final uid = firebaseAuth.currentUser?.uid;
+
+    List<CategoryEntity> allCategories = [];
+    final List<CategoryEntity> yourCategories =
+        await _getPersonCategories(uid!);
+    allCategories.addAll(yourCategories);
+
+    if (allCategories.isNotEmpty) {
+      await AppBoxes.categoryBox.addAll(allCategories);
+    }
+
+    return allCategories;
+  }
+
+  Future<List<CategoryEntity>> _getPersonCategories(String uid) async {
+    final allCategories = await firebaseFirestore
+        .collection(FirestoreCollections.users)
+        .doc(uid)
+        .collection(FirestoreCollections.categories)
+        .get();
+
+    List<CategoryEntity> categories = allCategories.docs
+        .map((category) => CategoryModel.fromSnapshot(category))
+        .toList();
+
+    return categories;
   }
 }

@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/functions/convert_base64_to_image.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/constants.dart';
@@ -52,7 +52,7 @@ class _IconPickerState extends State<IconPicker> {
             crossAxisSpacing: 5,
             mainAxisSpacing: 3.5,
           ),
-          itemCount: iconsTaskBlack.length,
+          itemCount: iconsCategory.length,
           itemBuilder: (context, index) {
             return InkWell(
               borderRadius: BorderRadius.circular(50),
@@ -73,13 +73,11 @@ class _IconPickerState extends State<IconPicker> {
                     : AppColors.whiteColor,
                 child: Container(
                   padding: const EdgeInsets.all(6),
-                  child: Image.memory(
-                    convertBase64Image(
-                      _selectedItem == index
-                          ? iconsTaskWhite[index]!
-                          : iconsTaskBlack[index]!,
-                    ),
-                    gaplessPlayback: true,
+                  child: SvgPicture.asset(
+                    iconsCategory[index]!,
+                    color: _selectedItem == index
+                        ? AppColors.whiteColor
+                        : AppColors.blackColor,
                   ),
                 ),
               ),

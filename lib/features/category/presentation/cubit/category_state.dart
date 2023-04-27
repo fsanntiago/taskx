@@ -18,6 +18,8 @@ class CheckCategoryLimitSuccess extends CategoryState {
   const CheckCategoryLimitSuccess({
     required this.isInCategoryLimit,
   });
+  @override
+  List<Object> get props => [isInCategoryLimit];
 }
 
 class CheckCategoryLimitFailed extends CategoryState {

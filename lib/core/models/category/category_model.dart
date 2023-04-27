@@ -18,6 +18,10 @@ class CategoryModel extends CategoryEntity {
   final int? color;
   @override
   final DateTime? updateAt;
+  @override
+  final bool? isDeleted;
+  @override
+  final int? totalTask;
 
   CategoryModel({
     this.uid,
@@ -27,6 +31,8 @@ class CategoryModel extends CategoryEntity {
     this.description,
     this.icon,
     this.updateAt,
+    this.isDeleted,
+    this.totalTask,
   }) : super(
           createdAt: createdAt,
           uid: uid,
@@ -35,6 +41,8 @@ class CategoryModel extends CategoryEntity {
           description: description,
           icon: icon,
           updateAt: updateAt,
+          isDeleted: isDeleted,
+          totalTask: totalTask,
         );
 
   factory CategoryModel.fromSnapshot(DocumentSnapshot snap) {
@@ -48,6 +56,8 @@ class CategoryModel extends CategoryEntity {
       description: snapshot['name'],
       createdAt: snapshot['createdAt'].toDate(),
       updateAt: snapshot['updateAt'].toDate(),
+      isDeleted: snapshot['isDeleted'] as bool,
+      totalTask: snapshot['totalTask'] as int,
     );
   }
 
@@ -59,6 +69,8 @@ class CategoryModel extends CategoryEntity {
         "uid": uid,
         "name": name,
         "createdAt": createdAt,
+        "isDeleted": isDeleted,
+        "totalTask": totalTask,
       };
 
   CategoryModel copyWith({
@@ -69,6 +81,8 @@ class CategoryModel extends CategoryEntity {
     int? icon,
     int? color,
     DateTime? updateAt,
+    bool? isDeleted,
+    int? totalTask,
   }) {
     return CategoryModel(
       uid: uid ?? this.uid,
@@ -78,6 +92,8 @@ class CategoryModel extends CategoryEntity {
       icon: icon ?? this.icon,
       color: color ?? this.color,
       updateAt: updateAt ?? this.updateAt,
+      isDeleted: isDeleted ?? this.isDeleted,
+      totalTask: totalTask ?? this.totalTask,
     );
   }
 }

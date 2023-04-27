@@ -14,6 +14,7 @@ import 'package:taskX/features/home/presentation/screens/home_screen.dart';
 import 'package:taskX/features/task/presentation/screens/create_task_screen.dart';
 
 import '../core/domain/entities/user/entities/user_entity.dart';
+import '../features/home/presentation/widgets/category/categories_builder.dart';
 
 class Routes {
   Routes._();
@@ -24,11 +25,13 @@ class Routes {
   static const String signIn = "/signIn";
   static const String createTask = "/createTask";
   static const String createCategory = "/createCategory";
+  static const String categories = "/categories";
 }
 
 class AppRouter {
   AppRouter._();
   static final _credentialCubit = sl<CredentialCubit>();
+  static final _categoryCubit = sl<CategoryCubit>();
 
   static Route<dynamic>? routesGenerator(RouteSettings settings) {
     final args = settings.arguments;
@@ -68,8 +71,13 @@ class AppRouter {
 
       case Routes.home:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<HomeCubit>(
-            create: (context) => sl<HomeCubit>(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<HomeCubit>(
+                create: (context) => sl<HomeCubit>()..homeLoadCategories(),
+              ),
+              BlocProvider<CategoryCubit>.value(value: _categoryCubit),
+            ],
             child: HomeScreen(user: args as UserEntity),
           ),
         );
@@ -81,11 +89,21 @@ class AppRouter {
 
       case Routes.createCategory:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider<CategoryCubit>(
-            create: (context) => sl<CategoryCubit>()..isInCategoryLimit(),
+          builder: (context) => BlocProvider<CategoryCubit>.value(
+            value: _categoryCubit..isInCategoryLimit(),
             child: const CreateCategoryScreen(),
           ),
         );
+
+      case Routes.categories:
+        // return MaterialPageRoute(
+        //   builder: (context) => BlocProvider<CategoryCubit>(
+        //     create: (context) => sl<CategoryCubit>()..isInCategoryLimit(),
+        //     child: const CreateCategoryScreen(),
+        //   ),
+        // );
+        return MaterialPageRoute(
+            builder: (context) => const CategoriesBuilder());
 
       default:
         return MaterialPageRoute(

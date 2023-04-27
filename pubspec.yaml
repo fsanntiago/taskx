@@ -12,7 +12,7 @@ dependencies:
   badges: ^3.0.2
   cached_network_image: ^3.2.3
   cloud_firestore: ^4.4.2
-  connectivity_plus: ^3.0.3 
+  connectivity_plus: ^3.0.3
   cupertino_icons: ^1.0.2
   date_picker_timeline: ^1.2.3
   dartz: ^0.10.1
@@ -69,6 +69,7 @@ flutter:
   assets:
     - firebase.json
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: Metropolis

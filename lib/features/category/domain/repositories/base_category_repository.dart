@@ -7,6 +7,6 @@ abstract class BaseCategoryRepository {
   Future<Either<Failure, CategoryEntity>> createCategory(
     CategoryEntity category,
   );
-
   Future<Either<Failure, bool>> IsInCategoriesLimit();
+  Future<Either<Failure, List<CategoryEntity>>> loadCategories();
 }

@@ -72,7 +72,7 @@ class _SignInFormWidgetState extends State<SignInFormWidget> {
           sizeVer(20),
           BlocBuilder<CredentialCubit, CredentialState>(
             builder: (context, state) {
-              if (state is CredentialSignUpLoading) {
+              if (state is CredentialLoginLoading) {
                 return const CircularProgressIndicator();
               } else {
                 return CustomButton(
