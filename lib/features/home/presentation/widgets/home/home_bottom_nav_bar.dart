@@ -16,7 +16,12 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is ScreenModuleChanged) {
+          indexSelected = state.index;
+        }
+      },
       builder: (context, state) {
         return BottomNavigationBar(
           currentIndex: indexSelected,

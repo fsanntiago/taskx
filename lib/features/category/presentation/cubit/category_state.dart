@@ -13,11 +13,13 @@ class CategoryInitial extends CategoryState {}
 class CheckingCaregoryLimit extends CategoryState {}
 
 class CheckCategoryLimitSuccess extends CategoryState {
-  final bool? isInCategoryLimit;
+  final bool isInCategoryLimit;
 
   const CheckCategoryLimitSuccess({
     required this.isInCategoryLimit,
   });
+  @override
+  List<Object> get props => [isInCategoryLimit];
 }
 
 class CheckCategoryLimitFailed extends CategoryState {

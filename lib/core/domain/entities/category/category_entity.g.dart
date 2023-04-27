@@ -24,13 +24,15 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       description: fields[3] as String?,
       icon: fields[4] as int?,
       updateAt: fields[6] as DateTime?,
+      isDeleted: fields[7] as bool?,
+      totalTask: fields[8] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CategoryEntity obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       ..writeByte(5)
       ..write(obj.color)
       ..writeByte(6)
-      ..write(obj.updateAt);
+      ..write(obj.updateAt)
+      ..writeByte(7)
+      ..write(obj.isDeleted)
+      ..writeByte(8)
+      ..write(obj.totalTask);
   }
 
   @override

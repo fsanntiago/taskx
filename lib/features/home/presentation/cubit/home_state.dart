@@ -20,3 +20,20 @@ class ScreenModuleChanged extends HomeState {
   @override
   List<Object> get props => [index];
 }
+
+class HomeCategoriesLoading extends HomeState {}
+
+class HomeCategoriesLoadingSuccess extends HomeState {
+  final List<CategoryEntity> categories;
+
+  const HomeCategoriesLoadingSuccess({required this.categories});
+
+  @override
+  List<Object> get props => [categories];
+}
+
+class HomeCategoriesLoadingFailure extends HomeState {
+  final String message;
+
+  const HomeCategoriesLoadingFailure({required this.message});
+}

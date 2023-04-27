@@ -65,4 +65,19 @@ class CategoryRepository implements BaseCategoryRepository {
       return Left(ErrorHandler.handle(e).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, List<CategoryEntity>>> loadCategories() async {
+    if (await checkInternetConnectivity.isConnected()) {
+      try {
+        final categories = await remoteCategoryDataSource.loadCategories();
+        return Right(categories);
+      } catch (e) {
+        return Left(ErrorHandler.handle(e).failure);
+      }
+    } else {
+      final user = localCategoryDataSource.loadCategories();
+      return Right(user);
+    }
+  }
 }

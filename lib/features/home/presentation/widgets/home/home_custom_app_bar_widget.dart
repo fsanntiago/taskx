@@ -8,7 +8,7 @@ import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/app_fonts.dart';
 import 'package:taskX/core/utils/constants.dart';
 
-import '../../../../core/domain/entities/user/entities/user_entity.dart';
+import '../../../../../core/domain/entities/user/entities/user_entity.dart';
 
 class HomeCustomAppBarWidget extends StatelessWidget {
   final UserEntity user;
@@ -35,7 +35,9 @@ class HomeCustomAppBarWidget extends StatelessWidget {
               children: [
                 Text(
                   IntlStrings.of(context).greeting(
-                    user.name!.substring(0, user.name!.indexOf(" ")),
+                    user.name!.indexOf(" ") != 1
+                        ? user.name!
+                        : user.name!.substring(0, user.name!.indexOf(" ")),
                   ),
                   style: Theme.of(context).textTheme.displayMedium,
                 ),

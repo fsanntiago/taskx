@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 import 'package:taskX/core/firebase/firestore_manager.dart';
+import 'package:taskX/core/utils/app_boxes.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/domain/entities/category/category_entity.dart';
@@ -71,5 +72,36 @@ class CategoryRemoteDataSource implements BaseRemoteCategoryDataSource {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<List<CategoryEntity>> loadCategories() async {
+    await AppBoxes.categoryBox.clear();
+    final uid = firebaseAuth.currentUser?.uid;
+
+    List<CategoryEntity> allCategories = [];
+    final List<CategoryEntity> yourCategories =
+        await _getPersonCategories(uid!);
+    allCategories.addAll(yourCategories);
+
+    if (allCategories.isNotEmpty) {
+      await AppBoxes.categoryBox.addAll(allCategories);
+    }
+
+    return allCategories;
+  }
+
+  Future<List<CategoryEntity>> _getPersonCategories(String uid) async {
+    final allCategories = await firebaseFirestore
+        .collection(FirestoreCollections.users)
+        .doc(uid)
+        .collection(FirestoreCollections.categories)
+        .get();
+
+    List<CategoryEntity> categories = allCategories.docs
+        .map((category) => CategoryModel.fromSnapshot(category))
+        .toList();
+
+    return categories;
   }
 }

@@ -41,6 +41,7 @@ class _DateWidgetState extends State<DateWidget> {
         Container(
           margin: const EdgeInsets.only(top: 18, bottom: 8),
           child: CustomTitleWidget(
+            onTap: () {},
             title: daySelected ?? IntlStrings.of(context).today,
           ),
         ),

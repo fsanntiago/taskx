@@ -36,4 +36,15 @@ class CategoryLocalDataSource implements BaseLocalCategoryDataSource {
       return false;
     }
   }
+
+  @override
+  List<CategoryEntity> loadCategories() {
+    List<CategoryEntity> categories = AppBoxes.categoryBox.values.map(
+      (category) {
+        return category;
+      },
+    ).toList();
+
+    return categories;
+  }
 }
