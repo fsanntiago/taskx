@@ -13,6 +13,7 @@ class CustomSliverAppBar extends StatefulWidget {
   var animationTween;
   bool isScrolling;
   String title;
+  int totalItems;
 
   CustomSliverAppBar({
     Key? key,
@@ -21,6 +22,7 @@ class CustomSliverAppBar extends StatefulWidget {
     required this.animationTween,
     required this.isScrolling,
     required this.title,
+    required this.totalItems,
   }) : super(key: key);
 
   @override
@@ -82,7 +84,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                           ),
                           sizeVer(2),
                           Text(
-                            "02/05 ${widget.title.toLowerCase()}",
+                            "0${widget.totalItems}/05 ${widget.title.toLowerCase()}",
                             style: AppTextStyles.textRegular(
                               color: AppColors.darkTextSecondaryColor,
                             ),
@@ -139,7 +141,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
               ),
               sizeVer(2),
               Text(
-                "02/05 ${widget.title.toLowerCase()}",
+                "0${widget.totalItems}/05 ${widget.title.toLowerCase()}",
                 style: AppTextStyles.textRegular(
                   color: AppColors.darkTextSecondaryColor,
                 ),

@@ -34,11 +34,9 @@ class HomeCustomAppBarWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  IntlStrings.of(context).greeting(
-                    user.name!.indexOf(" ") != 1
-                        ? user.name!
-                        : user.name!.substring(0, user.name!.indexOf(" ")),
-                  ),
+                  IntlStrings.of(context).greeting(user.name!.contains(" ")
+                      ? user.name!.substring(0, user.name!.indexOf(" "))
+                      : user.name!),
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 Container(

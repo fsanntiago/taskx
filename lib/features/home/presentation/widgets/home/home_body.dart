@@ -34,118 +34,108 @@ class HomeBody extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 5),
-        child: RefreshIndicator(
-          color: AppColors.darkBlueColor,
-          onRefresh: () async {
-            context.read<HomeCubit>().homeLoadCategories();
-          },
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 12, right: 16, left: 16),
-                  child: HomeCustomAppBarWidget(user: user),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 16),
-                  child: const DateWidget(),
-                ),
-                BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) {
-                    if (state is HomeCategoriesLoading) {
-                      return Center(
-                        heightFactor: context.height / 100,
-                        child: const CircularProgressIndicator(
-                          color: AppColors.darkBlueColor,
-                        ),
-                      );
-                    }
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 12, right: 16, left: 16),
+                child: HomeCustomAppBarWidget(user: user),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 16),
+                child: const DateWidget(),
+              ),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeCategoriesLoading) {
+                    return Center(
+                      heightFactor: context.height / 100,
+                      child: const CircularProgressIndicator(
+                        color: AppColors.darkBlueColor,
+                      ),
+                    );
+                  }
 
-                    if (context.read<HomeCubit>().categories.isEmpty &&
-                        state is ScreenModuleChanged &&
-                        state.index == 0) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              AppImages.noData,
-                              height: context.height * 0.35,
-                            ),
-                            const Text("Nao ha nenhuma categoria ou terefa...")
-                          ],
-                        ),
-                      );
-                    }
-                    if (state is HomeCategoriesLoadingSuccess &&
-                            context.read<HomeCubit>().categories.isNotEmpty ||
-                        state is ScreenModuleChanged && state.index == 0) {
-                      return Column(
+                  if (context.read<HomeCubit>().categories.isEmpty &&
+                      state is ScreenModuleChanged &&
+                      state.index == 0) {
+                    return Center(
+                      child: Column(
                         children: [
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            margin: const EdgeInsets.only(top: 18, bottom: 8),
-                            child: CustomTitleWidget(
-                              onTap: () {
-                                context
-                                    .read<HomeCubit>()
-                                    .changeScreenModule(index: 2);
-                              },
-                              title: IntlStrings.of(context).titleCategory,
-                              viewAll:
-                                  context.read<HomeCubit>().categories.length >=
-                                          3
-                                      ? true
-                                      : false,
-                            ),
+                          SvgPicture.asset(
+                            AppImages.noData,
+                            height: context.height * 0.35,
                           ),
-                          SizedBox(
-                            height: 130,
-                            child: CategoryListWidget(
-                              categories: context.read<HomeCubit>().categories,
-                            ),
-                          ),
-                          sizeVer(20),
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: CustomTitleWidget(
-                              onTap: () {},
-                              title:
-                                  IntlStrings.of(context).titleTasksinProgress,
-                              viewAll:
-                                  context.read<HomeCubit>().categories.length >=
-                                          3
-                                      ? true
-                                      : false,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 180,
-                            child: TaskInProgressListWidget(),
-                          ),
-                          sizeVer(20),
+                          const Text("Nao ha nenhuma categoria ou terefa...")
                         ],
-                      );
-                    } else {
-                      return Center(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              AppImages.noData,
-                              height: context.height * 0.35,
-                            ),
-                            const Text("Nao ha nenhuma categoria ou terefa...")
-                          ],
+                      ),
+                    );
+                  }
+                  if (state is HomeCategoriesLoadingSuccess &&
+                          context.read<HomeCubit>().categories.isNotEmpty ||
+                      state is ScreenModuleChanged && state.index == 0) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          margin: const EdgeInsets.only(top: 18, bottom: 8),
+                          child: CustomTitleWidget(
+                            onTap: () {
+                              context
+                                  .read<HomeCubit>()
+                                  .changeScreenModule(index: 2);
+                            },
+                            title: IntlStrings.of(context).titleCategory,
+                            viewAll:
+                                context.read<HomeCubit>().categories.length >= 3
+                                    ? true
+                                    : false,
+                          ),
                         ),
-                      );
-                    }
-                  },
-                ),
-              ],
-            ),
+                        SizedBox(
+                          height: 130,
+                          child: CategoryListWidget(
+                            categories: context.read<HomeCubit>().categories,
+                          ),
+                        ),
+                        sizeVer(20),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          margin: const EdgeInsets.only(bottom: 8),
+                          child: CustomTitleWidget(
+                            onTap: () {},
+                            title: IntlStrings.of(context).titleTasksinProgress,
+                            viewAll:
+                                context.read<HomeCubit>().categories.length >= 3
+                                    ? true
+                                    : false,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 180,
+                          child: TaskInProgressListWidget(),
+                        ),
+                        sizeVer(20),
+                      ],
+                    );
+                  } else {
+                    return Center(
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            AppImages.noData,
+                            height: context.height * 0.35,
+                          ),
+                          const Text("Nao ha nenhuma categoria ou terefa...")
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ),
       ),
