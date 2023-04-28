@@ -1,8 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.taskx.dev">
+    package="com.taskx">
    <application
-        android:usesCleartextTraffic="true"   
-        android:label="taskx-dev"
+        android:label="taskx"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskX/core/widget/custom_sliver_app_bar.dart';
+import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 
-import '../../../../../core/domain/entities/category/category_entity.dart';
 import 'category_grid_view_bluider.dart';
 
 class CategoriesBuilder extends StatefulWidget {
@@ -35,9 +36,12 @@ class _CategoriesBuilderState extends State<CategoriesBuilder>
 
   @override
   void dispose() {
-    super.dispose();
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
+    if (_animationController != null) {
+      _animationController.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -67,6 +71,7 @@ class _CategoriesBuilderState extends State<CategoriesBuilder>
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: CustomSliverAppBar(
+                  totalItems: context.read<HomeCubit>().categories.length,
                   title: "Categories",
                   innerBoxIsScrolled: innerBoxIsScrolled,
                   animationTween: _animationTween,
