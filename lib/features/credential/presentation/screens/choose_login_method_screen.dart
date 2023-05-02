@@ -28,6 +28,9 @@ class _ChooseLoginMethodScreenState extends State<ChooseLoginMethodScreen> {
       listener: (context, state) {
         if (state is CredentialLoginError) {
           buildToast(msg: state.message);
+          setState(() {
+            _isDisable = false;
+          });
         }
         if (state is CredentialLoginSuccess) {
           Navigator.of(context).pushNamedAndRemoveUntil(

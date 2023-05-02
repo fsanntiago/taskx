@@ -73,8 +73,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider<HomeCubit>(
-                create: (context) => sl<HomeCubit>()..homeLoadCategories(),
+              BlocProvider<HomeCubit>.value(
+                value: sl<HomeCubit>()..homeLoadCategories(),
               ),
               BlocProvider<CategoryCubit>.value(value: _categoryCubit),
             ],
