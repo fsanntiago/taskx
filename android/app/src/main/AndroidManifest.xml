@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.taskx">
+    package="com.taskx.dev">
    <application
         android:label="taskx"
         android:name="${applicationName}"
