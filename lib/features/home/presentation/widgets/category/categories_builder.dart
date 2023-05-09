@@ -78,6 +78,7 @@ class _CategoriesBuilderState extends State<CategoriesBuilder>
                   handle:
                       NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                   sliver: CustomSliverAppBar(
+                    backButton: false,
                     totalItems: context.read<HomeCubit>().categories.length,
                     title: "Categories",
                     innerBoxIsScrolled: innerBoxIsScrolled,

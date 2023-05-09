@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:taskX/container_injector.dart';
+import 'package:taskX/core/domain/entities/category/category_entity.dart';
 import 'package:taskX/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:taskX/features/category/presentation/cubit/category_cubit.dart';
 import 'package:taskX/features/category/presentation/screens/create_category_screen.dart';
@@ -14,6 +15,7 @@ import 'package:taskX/features/home/presentation/screens/home_screen.dart';
 import 'package:taskX/features/task/presentation/screens/create_task_screen.dart';
 
 import '../core/domain/entities/user/entities/user_entity.dart';
+import '../features/category/presentation/screens/category_details_screen.dart';
 import '../features/home/presentation/widgets/category/categories_builder.dart';
 
 class Routes {
@@ -26,6 +28,7 @@ class Routes {
   static const String createTask = "/createTask";
   static const String createCategory = "/createCategory";
   static const String categories = "/categories";
+  static const String categoryDetails = "/categoryDetails";
 }
 
 class AppRouter {
@@ -104,6 +107,13 @@ class AppRouter {
         // );
         return MaterialPageRoute(
             builder: (context) => const CategoriesBuilder());
+
+      case Routes.categoryDetails:
+        return MaterialPageRoute(
+          builder: (context) => CategoryDetails(
+            category: args as CategoryEntity,
+          ),
+        );
 
       default:
         return MaterialPageRoute(

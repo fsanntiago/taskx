@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:taskX/config/app_route.dart';
 import 'package:taskX/core/domain/entities/category/category_entity.dart';
 import 'package:taskX/core/utils/constants.dart';
 
@@ -49,7 +50,10 @@ class CustomCategoryCard extends StatelessWidget {
             AppColors.whiteColor,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed(Routes.categoryDetails, arguments: category);
+        },
         child: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

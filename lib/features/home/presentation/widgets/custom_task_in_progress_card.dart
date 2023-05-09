@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -9,12 +8,14 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_fonts.dart';
 
 class CustomTaskInProgressCard extends StatelessWidget {
-  const CustomTaskInProgressCard({
+  final CategoryEntity category;
+  double? widthPercentIndicator;
+
+  CustomTaskInProgressCard({
     Key? key,
     required this.category,
+    this.widthPercentIndicator,
   }) : super(key: key);
-
-  final CategoryEntity category;
 
   @override
   Widget build(BuildContext context) {
@@ -163,25 +164,22 @@ class CustomTaskInProgressCard extends StatelessWidget {
               ],
             ),
             sizeVer(8),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: LinearPercentIndicator(
-                animation: true,
-                animationDuration: 1200,
-                width: 205,
-                lineHeight: 7,
-                barRadius: const Radius.circular(10),
-                percent: 0.5,
-                backgroundColor: AppColors.lightBackgroundProgress,
-                progressColor: AppColors.lightTitleColor,
-                trailing: const Text(
-                  "50%",
-                  style: TextStyle(
-                    fontSize: FontSize.boxTitle,
-                    fontWeight: FontThickness.bold,
-                    color: AppColors.lightTitleColor,
-                    letterSpacing: LetterSpacingCustom.letterSpacing,
-                  ),
+            LinearPercentIndicator(
+              animation: true,
+              animationDuration: 1200,
+              width: widthPercentIndicator ?? 205,
+              lineHeight: 7,
+              barRadius: const Radius.circular(10),
+              percent: 0.5,
+              backgroundColor: AppColors.lightBackgroundProgress,
+              progressColor: AppColors.lightTitleColor,
+              trailing: const Text(
+                "50%",
+                style: TextStyle(
+                  fontSize: FontSize.boxTitle,
+                  fontWeight: FontThickness.bold,
+                  color: AppColors.lightTitleColor,
+                  letterSpacing: LetterSpacingCustom.letterSpacing,
                 ),
               ),
             ),
