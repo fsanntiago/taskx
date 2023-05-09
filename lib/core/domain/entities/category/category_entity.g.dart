@@ -25,7 +25,7 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       icon: fields[4] as int?,
       updateAt: fields[6] as DateTime?,
       isDeleted: fields[7] as bool?,
-      totalTask: fields[8] as int?,
+      totalTasks: fields[8] as int?,
     );
   }
 
@@ -50,7 +50,7 @@ class CategoryEntityAdapter extends TypeAdapter<CategoryEntity> {
       ..writeByte(7)
       ..write(obj.isDeleted)
       ..writeByte(8)
-      ..write(obj.totalTask);
+      ..write(obj.totalTasks);
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/cli_commands.dart';
 import '../text_styles.dart';
 import '../utils/app_colors.dart';
 import '../utils/constants.dart';
+import 'filter_menu.dart';
 
 class CustomSliverAppBar extends StatefulWidget {
   final bool innerBoxIsScrolled;
@@ -14,6 +15,8 @@ class CustomSliverAppBar extends StatefulWidget {
   bool isScrolling;
   String title;
   int totalItems;
+  String? subtitle;
+  bool backButton;
 
   CustomSliverAppBar({
     Key? key,
@@ -23,6 +26,8 @@ class CustomSliverAppBar extends StatefulWidget {
     required this.isScrolling,
     required this.title,
     required this.totalItems,
+    this.subtitle,
+    required this.backButton,
   }) : super(key: key);
 
   @override
@@ -43,6 +48,18 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      leading: widget.backButton != false
+          ? IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Feather.arrow_left,
+                color: AppColors.blackColor,
+                size: 28,
+              ),
+            )
+          : null,
       forceElevated: widget.innerBoxIsScrolled,
       expandedHeight: _openFilter
           ? MediaQuery.of(context).size.height * 0.35
@@ -51,13 +68,13 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
       pinned: true,
       scrolledUnderElevation: 0.3,
       backgroundColor: AppColors.lightBackgroundColor,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       titleSpacing: 0.0,
       toolbarHeight: (widget.innerBoxIsScrolled == true)
           ? MediaQuery.of(context).size.height * 0.08
           : MediaQuery.of(context).size.height * 0.08,
       centerTitle: false,
-      leadingWidth: 0.0,
+      leadingWidth: widget.backButton != false ? 36.0 : 0.0,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -84,7 +101,9 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                           ),
                           sizeVer(2),
                           Text(
-                            "0${widget.totalItems}/05 ${widget.title.toLowerCase()}",
+                            widget.totalItems < 10
+                                ? "0${widget.totalItems}/05 ${widget.subtitle ?? widget.title.toLowerCase()}"
+                                : "${widget.totalItems}/05 ${widget.subtitle ?? widget.title.toLowerCase()}",
                             style: AppTextStyles.textRegular(
                               color: AppColors.darkTextSecondaryColor,
                             ),
@@ -94,9 +113,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                       const Spacer(),
                       IconButton(
                         splashRadius: 25,
-                        onPressed: () {
-                          print("icon");
-                        },
+                        onPressed: () {},
                         icon: const Icon(
                           Feather.search,
                           color: AppColors.blackColor,
@@ -134,14 +151,16 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
             children: [
               sizeVer(50),
               Text(
-                widget.title,
+                widget.title.capitalize(),
                 style: AppTextStyles.applicationTitle(
                   color: AppColors.blackColor,
                 ),
               ),
               sizeVer(2),
               Text(
-                "0${widget.totalItems}/05 ${widget.title.toLowerCase()}",
+                widget.totalItems < 10
+                    ? "0${widget.totalItems}/05 ${widget.subtitle ?? widget.title.toLowerCase()}"
+                    : "${widget.totalItems}/05 ${widget.subtitle ?? widget.title.toLowerCase()}",
                 style: AppTextStyles.textRegular(
                   color: AppColors.darkTextSecondaryColor,
                 ),
@@ -159,9 +178,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                   const Spacer(),
                   IconButton(
                     splashRadius: 25,
-                    onPressed: () {
-                      print("icon");
-                    },
+                    onPressed: () {},
                     icon: const Icon(Feather.search),
                   ),
                   sizeHor(12),
@@ -184,7 +201,11 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                         sizeVer(10),
                         SizedBox(
                           height: 40,
-                          child: menuFilter(),
+                          child: FilterMenu(
+                            onPressAll: () {},
+                            onPressDone: () {},
+                            onPressInProgress: () {},
+                          ),
                         ),
                       ],
                     )
@@ -196,101 +217,6 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget menuFilter() {
-    return ListView(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-      ),
-      children: [
-        Ink(
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.blackColor.withOpacity(0.05),
-                blurRadius: 5,
-                spreadRadius: 1,
-                offset: const Offset(1, 2),
-              ),
-            ],
-          ),
-          width: 110,
-          child: InkWell(
-            onTap: () {},
-            child: Center(
-              child: Text(
-                "All",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.textMedium(color: AppColors.blackColor),
-              ),
-            ),
-          ),
-        ),
-        sizeHor(20),
-        Ink(
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.blackColor.withOpacity(0.05),
-                blurRadius: 5,
-                spreadRadius: 1,
-                offset: const Offset(1, 2),
-              ),
-            ],
-          ),
-          width: 110,
-          child: InkWell(
-            onTap: () {},
-            child: Center(
-              child: Text(
-                "In Progress",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.textMedium(color: AppColors.blackColor),
-              ),
-            ),
-          ),
-        ),
-        sizeHor(20),
-        Ink(
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.blackColor.withOpacity(0.05),
-                blurRadius: 5,
-                spreadRadius: 1,
-                offset: const Offset(1, 2),
-              ),
-            ],
-          ),
-          width: 110,
-          child: InkWell(
-            onTap: () {},
-            child: Center(
-              child: Text(
-                "Done",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.textMedium(color: AppColors.blackColor),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

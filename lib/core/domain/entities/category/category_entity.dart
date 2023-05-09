@@ -22,7 +22,7 @@ class CategoryEntity extends HiveObject with EquatableMixin {
   @HiveField(7)
   final bool? isDeleted;
   @HiveField(8)
-  final int? totalTask;
+  final int? totalTasks;
 
   CategoryEntity({
     this.uid,
@@ -33,7 +33,7 @@ class CategoryEntity extends HiveObject with EquatableMixin {
     this.icon,
     this.updateAt,
     this.isDeleted,
-    this.totalTask,
+    this.totalTasks,
   });
 
   @override
@@ -46,6 +46,6 @@ class CategoryEntity extends HiveObject with EquatableMixin {
         icon,
         updateAt,
         isDeleted,
-        totalTask,
+        totalTasks,
       ];
 }
