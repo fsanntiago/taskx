@@ -7,6 +7,7 @@ Future<bool> buildAlertDialog(BuildContext context, Widget content) async {
     useRootNavigator: false,
     context: context,
     builder: (context) => AlertDialog(
+      insetPadding: const EdgeInsets.all(16),
       content: content,
     ),
   );

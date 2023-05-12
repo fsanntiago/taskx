@@ -27,6 +27,12 @@ class AuthInsteadOf extends StatelessWidget {
             state is CredentialLoginLoading) {
           isLoaggingIn = true;
         }
+        if (state is CredentialLoginError ||
+            state is CredentialLoginSuccess ||
+            state is CredentialSignUpError ||
+            state is CredentialSignUpSuccess) {
+          isLoaggingIn = false;
+        }
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

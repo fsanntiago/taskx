@@ -35,6 +35,7 @@ class AppRouter {
   AppRouter._();
   static final _credentialCubit = sl<CredentialCubit>();
   static final _categoryCubit = sl<CategoryCubit>();
+  static final _homeCubit = sl<HomeCubit>();
 
   static Route<dynamic>? routesGenerator(RouteSettings settings) {
     final args = settings.arguments;
@@ -76,8 +77,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider<HomeCubit>.value(
-                value: sl<HomeCubit>()..homeLoadCategories(),
+              BlocProvider<HomeCubit>(
+                create: (context) => _homeCubit..homeLoadCategories(),
               ),
               BlocProvider<CategoryCubit>.value(value: _categoryCubit),
             ],
@@ -87,7 +88,15 @@ class AppRouter {
 
       case Routes.createTask:
         return MaterialPageRoute(
-          builder: (context) => const CreateTaskScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<HomeCubit>.value(
+                value: _homeCubit,
+              ),
+              // BlocProvider<CategoryCubit>.value(value: _categoryCubit),
+            ],
+            child: const CreateTaskScreen(),
+          ),
         );
 
       case Routes.createCategory:

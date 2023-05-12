@@ -23,6 +23,8 @@ class CustomFormField extends StatefulWidget {
   final Color? labelColor;
   final String? hintText;
   final Color? inputTextColor;
+  final IconData? customSuffixIcon;
+  final bool? hasSuffixIcon;
 
   const CustomFormField({
     super.key,
@@ -45,6 +47,8 @@ class CustomFormField extends StatefulWidget {
     this.labelColor,
     this.hintText,
     this.inputTextColor,
+    this.customSuffixIcon,
+    this.hasSuffixIcon,
   });
 
   @override
@@ -110,26 +114,34 @@ class _CustomFormFieldState extends State<CustomFormField> {
         suffixIconConstraints: widget.isPasswordField == true
             ? const BoxConstraints(minHeight: 50, minWidth: 40)
             : const BoxConstraints(),
-        suffixIcon: widget.isPasswordField == true
-            ? GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _obscureText = !_obscureText;
-                  });
-                },
-                child: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                  color: _obscureText == false
-                      ? AppColors.primaryColor
-                      : AppColors.whiteColor.withOpacity(0.5),
-                ),
-              )
-            : Container(
-                color: Colors.amber,
-                height: 0,
-                width: 0,
-                padding: EdgeInsets.zero,
-              ),
+        suffixIcon:
+            widget.isPasswordField == true || widget.hasSuffixIcon == true
+                ? GestureDetector(
+                    onTap: () {
+                      if (widget.isPasswordField == true) {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      }
+                    },
+                    child: Icon(
+                      widget.isPasswordField == true
+                          ? _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility
+                          : widget.customSuffixIcon,
+                      color: widget.isPasswordField == true
+                          ? _obscureText == false
+                              ? AppColors.primaryColor
+                              : AppColors.whiteColor.withOpacity(0.5)
+                          : AppColors.darkBlueColor.withOpacity(0.3),
+                    ),
+                  )
+                : Container(
+                    height: 0,
+                    width: 0,
+                    padding: EdgeInsets.zero,
+                  ),
       ),
     );
   }

@@ -61,14 +61,14 @@ class CustomTaskInProgressCard extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.ColorsTasksAndCategories[category.color]!
+                    color: AppColors.colorsTasksAndCategories[category.color]!
                         .withOpacity(0.10),
                     blurRadius: 5,
                     spreadRadius: 3,
                     blurStyle: BlurStyle.normal,
                   )
                 ],
-                color: AppColors.ColorsTasksAndCategories[category.color]!
+                color: AppColors.colorsTasksAndCategories[category.color]!
                     .withOpacity(0.10),
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -76,7 +76,7 @@ class CustomTaskInProgressCard extends StatelessWidget {
                 category.name!,
                 // titleCategory.trim().capitalize(),
                 style: TextStyle(
-                  color: AppColors.ColorsTasksAndCategories[category.color]!,
+                  color: AppColors.colorsTasksAndCategories[category.color]!,
                 ),
               ),
             ),
