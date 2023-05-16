@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:taskX/core/firebase/firestore_collections.dart';
 
@@ -9,8 +10,12 @@ import '../models/user/user_model.dart';
 
 class FirestoreManager {
   final FirebaseFirestore firestore;
+  // final FirebaseStorage firebaseStorage;
+  // final FirebaseAuth firebaseAuth;
 
   FirestoreManager({
+    // required this.firebaseStorage,
+    // required this.firebaseAuth,
     required this.firestore,
   });
 
@@ -92,4 +97,25 @@ class FirestoreManager {
     var query = await categoryCollection.get();
     return query.size;
   }
+
+  // Future<String> uploadImageToStorage({
+  //   required FilePickerResult file,
+  //   required String childName,
+  //   required bool isTaskFile,
+  // }) async {
+  //   Reference storageRef = firebaseStorage
+  //       .ref()
+  //       .child(childName)
+  //       .child(firebaseAuth.currentUser!.uid);
+  //   if (isTaskFile) {
+  //     String id = const Uuid().v1();
+  //     storageRef = storageRef.child(id);
+  //   }
+
+  //   final uploadTask = storageRef.putFile(File(file.files.first.path!));
+  //   final fileUrl =
+  //       (await uploadTask.whenComplete(() => {})).ref.getDownloadURL();
+
+  //   return fileUrl;
+  // }
 }

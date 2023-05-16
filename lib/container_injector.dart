@@ -10,6 +10,8 @@ import 'package:taskX/features/category/category_injector.dart';
 import 'package:taskX/features/credential/credential_injector.dart';
 import 'package:taskX/features/home/home_injector.dart';
 
+import 'features/task/task_injector.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initApp() async {
@@ -19,6 +21,7 @@ Future<void> initApp() async {
   initCredential();
   initHome();
   initCategory();
+  initTask();
 }
 
 void _initCore() {

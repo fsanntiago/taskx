@@ -93,7 +93,8 @@ class HomeBody extends StatelessWidget {
                                     : false,
                           ),
                         ),
-                        SizedBox(
+                        Container(
+                          alignment: Alignment.centerLeft,
                           height: 130,
                           child: CategoryListWidget(
                             categories: context.read<HomeCubit>().categories,

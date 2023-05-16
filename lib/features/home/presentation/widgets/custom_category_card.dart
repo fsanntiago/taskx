@@ -64,14 +64,14 @@ class CustomCategoryCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.ColorsTasksAndCategories[category.color]!
+                      color: AppColors.colorsTasksAndCategories[category.color]!
                           .withOpacity(0.10),
                       blurRadius: 5,
                       spreadRadius: 3,
                       blurStyle: BlurStyle.normal,
                     )
                   ],
-                  color: AppColors.ColorsTasksAndCategories[category.color]!
+                  color: AppColors.colorsTasksAndCategories[category.color]!
                       .withOpacity(0.10),
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -80,7 +80,7 @@ class CustomCategoryCard extends StatelessWidget {
                   // titleCategory.trim().capitalize(),
                   style: TextStyle(
                       color:
-                          AppColors.ColorsTasksAndCategories[category.color]!),
+                          AppColors.colorsTasksAndCategories[category.color]!),
                 ),
               ),
               Row(
@@ -100,7 +100,7 @@ class CustomCategoryCard extends StatelessWidget {
                     iconsCategory[category.icon]!,
                     // scale: 2,
                     height: 28,
-                    color: AppColors.ColorsTasksAndCategories[category.color],
+                    color: AppColors.colorsTasksAndCategories[category.color],
                   ),
                 ],
               ),

@@ -65,7 +65,7 @@ class _CreateCategoryScreenState extends State<CreateCategoryScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomHeader(title: "Create Category"),
+                  const CustomHeader(title: "Create new Category"),
                   sizeVer(16),
                   const CreateCategoryForm(),
                   sizeVer(70),
