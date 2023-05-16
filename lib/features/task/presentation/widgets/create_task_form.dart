@@ -25,7 +25,8 @@ class _CreateTaskFormState extends State<CreateTaskForm> {
 
   late final TextEditingController _titleController;
   late final TextEditingController _descriptionController;
-  String? _selectedCategory;
+  late String? _selectedCategory =
+      widget.categories.isNotEmpty ? widget.categories.first.uid : null;
   DateTime? _selectedDate;
 
   @override
@@ -109,6 +110,9 @@ class _CreateTaskFormState extends State<CreateTaskForm> {
             sizeVer(12),
             CategorySelect(
               categories: widget.categories,
+              isValid: _autovalidateMode == AutovalidateMode.always
+                  ? _selectedCategory != null
+                  : true,
               handleSelectedCategory: (selectedCategory) {
                 setState(() {
                   _selectedCategory = selectedCategory;
@@ -132,16 +136,7 @@ class _CreateTaskFormState extends State<CreateTaskForm> {
     );
   }
 
-  test() {
-    print("true");
-  }
-
-  test1() {
-    print('false');
-  }
-
   void _createTask() {
-    print(_autovalidateMode.name);
     final task = TaskModel(
       name: _titleController.text,
       description: _descriptionController.text,

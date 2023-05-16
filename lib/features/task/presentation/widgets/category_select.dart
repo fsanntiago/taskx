@@ -6,15 +6,19 @@ import 'package:taskX/core/domain/entities/category/category_entity.dart';
 import 'package:taskX/core/text_styles.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/constants.dart';
+import 'package:taskX/core/widget/error_message_input.dart';
 
 class CategorySelect extends StatefulWidget {
   final List<CategoryEntity> categories;
   final void Function(String? selectedCategory) handleSelectedCategory;
+  bool isValid = true;
 
-  const CategorySelect(
-      {super.key,
-      required this.categories,
-      required this.handleSelectedCategory});
+  CategorySelect({
+    super.key,
+    required this.categories,
+    required this.handleSelectedCategory,
+    required this.isValid,
+  });
 
   @override
   State<CategorySelect> createState() => _CategorySelectState();
@@ -22,7 +26,6 @@ class CategorySelect extends StatefulWidget {
 
 class _CategorySelectState extends State<CategorySelect> {
   int _selectedItem = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,14 +73,18 @@ class _CategorySelectState extends State<CategorySelect> {
                     padding: const EdgeInsets.all(5),
                     shape: ContinuousRectangleBorder(
                       side: BorderSide(
-                          width: 1.2,
-                          color: AppColors.darkBlueColor.withOpacity(0.3)),
+                        width: 1.2,
+                        color: widget.isValid == false
+                            ? AppColors.errorColor
+                            : AppColors.darkBlueColor.withOpacity(0.3),
+                      ),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    label: const Icon(
+                    label: Icon(
                       Feather.plus,
-                      // size: 16,
-                      color: AppColors.darkBlueColor,
+                      color: widget.isValid == false
+                          ? AppColors.errorColor
+                          : AppColors.darkBlueColor,
                     ),
                     labelStyle: AppTextStyles.subTitle(
                       color: AppColors.whiteColor,
@@ -92,12 +99,12 @@ class _CategorySelectState extends State<CategorySelect> {
                 highlightColor: Colors.transparent,
                 enableFeedback: false,
                 onTap: () {
-                  widget.handleSelectedCategory(
-                    widget.categories[index - 1].uid,
-                  );
                   setState(() {
                     _selectedItem = index - 1;
                   });
+                  widget.handleSelectedCategory(
+                    widget.categories[_selectedItem].uid,
+                  );
                 },
                 child: Chip(
                   padding: const EdgeInsets.all(10),
@@ -138,6 +145,17 @@ class _CategorySelectState extends State<CategorySelect> {
             itemCount: widget.categories.length + 1,
           ),
         ),
+
+        // Error message if a category was not selected
+        widget.isValid == false
+            ? const ErrorMessageInput(
+                errorMessage: "Category is Required",
+                paddingHorizontal: 25,
+                paddingVertical: 1,
+              )
+            : Container(
+                height: 0,
+              ),
       ],
     );
   }

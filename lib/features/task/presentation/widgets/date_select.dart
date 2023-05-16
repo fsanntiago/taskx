@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:taskX/core/functions/build_alert_dialog.dart';
 import 'package:taskX/core/text_styles.dart';
 import 'package:taskX/core/utils/app_colors.dart';
+import 'package:taskX/core/widget/error_message_input.dart';
 
 import '../../../../core/utils/constants.dart';
 
@@ -115,21 +116,8 @@ class _DateSelectState extends State<DateSelect> {
 
           // Error message if date was not selected
           widget.isValid == false
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 13,
-                    vertical: 8,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Deadline date is Required",
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.textRegular(
-                        color: AppColors.errorColor,
-                      ),
-                    ),
-                  ),
+              ? const ErrorMessageInput(
+                  errorMessage: "Deadline date is Required",
                 )
               : Container(
                   height: 0,
