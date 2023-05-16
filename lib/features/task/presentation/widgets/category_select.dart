@@ -7,19 +7,14 @@ import 'package:taskX/core/text_styles.dart';
 import 'package:taskX/core/utils/app_colors.dart';
 import 'package:taskX/core/utils/constants.dart';
 
-var list = [
-  'Pessoal',
-  'Trabalhoo',
-  'Lazer',
-  'Vai tomar nocu',
-  'haha',
-  'Pessoal',
-];
-
 class CategorySelect extends StatefulWidget {
   final List<CategoryEntity> categories;
+  final void Function(String? selectedCategory) handleSelectedCategory;
 
-  const CategorySelect({super.key, required this.categories});
+  const CategorySelect(
+      {super.key,
+      required this.categories,
+      required this.handleSelectedCategory});
 
   @override
   State<CategorySelect> createState() => _CategorySelectState();
@@ -61,6 +56,7 @@ class _CategorySelectState extends State<CategorySelect> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
+              /***  Button to create new Category ***/
               if (index == 0) {
                 return InkWell(
                   splashColor: Colors.transparent,
@@ -90,53 +86,52 @@ class _CategorySelectState extends State<CategorySelect> {
                   ),
                 );
               }
+              /***  Button to all categories ***/
               return InkWell(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 enableFeedback: false,
                 onTap: () {
+                  widget.handleSelectedCategory(
+                    widget.categories[index - 1].uid,
+                  );
                   setState(() {
-                    _selectedItem = index;
+                    _selectedItem = index - 1;
                   });
-                  if (widget.categories.isEmpty) {
-                    Navigator.of(context)
-                        .popAndPushNamed(Routes.createCategory);
-                  }
                 },
                 child: Chip(
-                    padding: const EdgeInsets.all(10),
-                    shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    label: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          iconsCategory[widget.categories[index - 1].icon]!,
-                          height: 24,
-                          color: _selectedItem == index
-                              ? AppColors.whiteColor
-                              : AppColors.colorsTasksAndCategories[
-                                  widget.categories[index - 1].color],
-                        ),
-                        sizeHor(12),
-                        Text(widget.categories[index - 1].name!),
-                      ],
-                    ),
-                    labelStyle: AppTextStyles.subTitle(
-                      color: _selectedItem == index
-                          ? AppColors.whiteColor
-                          : AppColors.colorsTasksAndCategories[
-                              widget.categories[index - 1].color],
-                    ),
-                    backgroundColor: _selectedItem == index
-                        ? AppColors.darkBlueColor
+                  padding: const EdgeInsets.all(10),
+                  shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  label: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        iconsCategory[widget.categories[index - 1].icon]!,
+                        height: 24,
+                        color: _selectedItem == index - 1
+                            ? AppColors.whiteColor
+                            : AppColors.colorsTasksAndCategories[
+                                widget.categories[index - 1].color],
+                      ),
+                      sizeHor(12),
+                      Text(widget.categories[index - 1].name!),
+                    ],
+                  ),
+                  labelStyle: AppTextStyles.subTitle(
+                    color: _selectedItem == index - 1
+                        ? AppColors.whiteColor
                         : AppColors.colorsTasksAndCategories[
-                                widget.categories[index - 1].color]!
-                            .withOpacity(0.08)
-                    // : AppColors.darkBlueColor.withOpacity(0.08),
-                    ),
+                            widget.categories[index - 1].color],
+                  ),
+                  backgroundColor: _selectedItem == index - 1
+                      ? AppColors.darkBlueColor
+                      : AppColors.colorsTasksAndCategories[
+                              widget.categories[index - 1].color]!
+                          .withOpacity(0.08),
+                ),
               );
             },
             separatorBuilder: (context, index) => sizeHor(16),

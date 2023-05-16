@@ -13,6 +13,8 @@ import 'package:taskX/features/category/category_injector.dart';
 import 'package:taskX/features/credential/credential_injector.dart';
 import 'package:taskX/features/home/home_injector.dart';
 
+import 'features/task/task_injector.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initApp() async {
@@ -22,6 +24,7 @@ Future<void> initApp() async {
   initCredential();
   initHome();
   initCategory();
+  initTask();
 }
 
 void _initCore() {
@@ -43,13 +46,6 @@ void _initCore() {
 
 // Init firebase Emulator
 void _initFirebase() async {
-  var firebaseConfig = await _readJsonFile('firebase.json');
-  final firestorePort = firebaseConfig['emulators']['firestore']['port'] as int;
-  final authPort = firebaseConfig['emulators']['auth']['port'] as int;
-  final functionsPort = firebaseConfig['emulators']['functions']['port'] as int;
-  final host = firebaseConfig['emulators']['firestore']['host'] as String;
-  // final storagePort = firebaseConfig['emulators']['storage']['post'];
-
   // add firebase auth instance
   sl.registerLazySingleton<FirebaseAuth>(() {
     var authInstance = FirebaseAuth.instance;

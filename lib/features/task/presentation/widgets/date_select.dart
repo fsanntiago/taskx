@@ -9,7 +9,14 @@ import 'package:taskX/core/utils/app_colors.dart';
 import '../../../../core/utils/constants.dart';
 
 class DateSelect extends StatefulWidget {
-  const DateSelect({super.key});
+  final void Function(DateTime selectedDate) handleSelectedDate;
+  bool isValid = true;
+
+  DateSelect({
+    super.key,
+    required this.handleSelectedDate,
+    required this.isValid,
+  });
 
   @override
   State<DateSelect> createState() => _DateSelectState();
@@ -19,7 +26,7 @@ class _DateSelectState extends State<DateSelect> {
   final DateRangePickerController _datePickerController =
       DateRangePickerController();
 
-  DateTime? date;
+  DateTime date = DateTime.now();
 
   @override
   void initState() {
@@ -56,148 +63,191 @@ class _DateSelectState extends State<DateSelect> {
           InkWell(
             onTap: () {
               _showCalendar(
-                context,
-                currentLocale,
-                (selectedDate) {
+                context: context,
+                currentLocale: currentLocale,
+                onSubmitDate: (selectedDate) {
                   setState(
                     () {
                       date = selectedDate;
+                      widget.handleSelectedDate(date);
                     },
                   );
                 },
               );
+              FocusScope.of(context).unfocus();
             },
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(width: 1.2, color: AppColors.darkBlueColor),
+                border: Border.all(
+                  width: 1.2,
+                  color: widget.isValid == false
+                      ? AppColors.errorColor
+                      : AppColors.darkBlueColor,
+                ),
                 borderRadius: const BorderRadius.all(Radius.circular(5)),
               ),
               padding: const EdgeInsets.all(13),
-              // height: 50,
               width: 500,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    date!.day == DateTime.now().day
+                    date.day == DateTime.now().day
                         ? 'Deadline date'
-                        : DateFormat.yMMMMd(currentLocale).format(date!),
+                        : DateFormat.yMMMMd(currentLocale).format(date),
                     style: AppTextStyles.inputText(
-                      color: date!.day == DateTime.now().day
+                      color: date.day == DateTime.now().day
                           ? AppColors.darkBlueColor.withOpacity(0.6)
                           : AppColors.darkBlueColor.withOpacity(0.8),
                     ),
                   ),
-                  const Icon(
+                  Icon(
                     Icons.calendar_month,
-                    color: AppColors.blue,
-                  )
+                    color: widget.isValid == false
+                        ? AppColors.errorColor
+                        : AppColors.blue,
+                  ),
                 ],
               ),
             ),
           ),
+
+          // Error message if date was not selected
+          widget.isValid == false
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 13,
+                    vertical: 8,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Deadline date is Required",
+                      textAlign: TextAlign.start,
+                      style: AppTextStyles.textRegular(
+                        color: AppColors.errorColor,
+                      ),
+                    ),
+                  ),
+                )
+              : Container(
+                  height: 0,
+                ),
         ],
       ),
     );
   }
 
-  _showCalendar(BuildContext context, String currentLocale,
-      Function(DateTime) onSubmitDate) {
+// Calendar
+  _showCalendar({
+    required BuildContext context,
+    required String currentLocale,
+    required Function(DateTime) onSubmitDate,
+  }) {
     return buildAlertDialog(
-        context, _calendar(context, currentLocale, onSubmitDate));
-  }
+      context,
+      WillPopScope(
+        onWillPop: () async => true,
+        child: Builder(
+          builder: (context) {
+            var height = MediaQuery.of(context).size.height;
+            var width = MediaQuery.of(context).size.width;
 
-  Widget _calendar(BuildContext context, String currentLocale,
-      Function(DateTime) onSubmitDate) {
-    return WillPopScope(
-      onWillPop: () async => true,
-      child: Builder(
-        builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
-          return SizedBox(
-            // color: Colors.amber,
-            height: height - 400,
-            width: width,
-            child: Directionality(
-              textDirection: currentLocale == 'ar' ||
-                      currentLocale == 'fa' ||
-                      currentLocale == 'he' ||
-                      currentLocale == 'ps' ||
-                      currentLocale == 'ur'
-                  ? ui.TextDirection.rtl
-                  : ui.TextDirection.ltr,
-              child: SfDateRangePicker(
-                controller: _datePickerController,
-                onCancel: () {
-                  Navigator.of(context).pop();
-                },
-                onSubmit: (value) {
-                  if (value is DateTime) {
-                    onSubmitDate(value);
+            return SizedBox(
+              // color: Colors.amber,
+              height: height - 400,
+              width: width,
+              child: Directionality(
+                textDirection: currentLocale == 'ar' ||
+                        currentLocale == 'fa' ||
+                        currentLocale == 'he' ||
+                        currentLocale == 'ps' ||
+                        currentLocale == 'ur'
+                    ? ui.TextDirection.rtl
+                    : ui.TextDirection.ltr,
+                child: SfDateRangePicker(
+                  controller: _datePickerController,
+                  onCancel: () {
                     Navigator.of(context).pop();
-                  }
-                },
-                view: DateRangePickerView.month,
-                headerHeight: 50,
-                minDate: DateTime.now(),
-                selectionColor: AppColors.darkBlueColor,
-                todayHighlightColor: AppColors.darkBlueColor,
-                selectionTextStyle: AppTextStyles.textBold(),
-                showActionButtons: true,
-                initialSelectedDate: DateTime.now(),
-                headerStyle: DateRangePickerHeaderStyle(
-                  textAlign: TextAlign.center,
-                  backgroundColor: AppColors.darkBlueColor,
-                  textStyle: AppTextStyles.subTitle(
-                    color: AppColors.whiteColor,
+                  },
+                  onSubmit: (value) {
+                    if (value is DateTime) {
+                      onSubmitDate(value.toUtc());
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  view: DateRangePickerView.month,
+                  headerHeight: 50,
+                  minDate: DateTime.now(),
+                  selectionColor: AppColors.darkBlueColor,
+                  todayHighlightColor: AppColors.darkBlueColor,
+                  selectionTextStyle: AppTextStyles.textBold(),
+                  showActionButtons: true,
+                  initialSelectedDate:
+                      DateTime.now().add(const Duration(days: 1)),
+                  selectableDayPredicate: (DateTime dateTime) {
+                    if (dateTime.day == DateTime.now().day) {
+                      return false;
+                    }
+                    return true;
+                  },
+                  headerStyle: DateRangePickerHeaderStyle(
+                    textAlign: TextAlign.center,
+                    backgroundColor: AppColors.darkBlueColor,
+                    textStyle: AppTextStyles.subTitle(
+                      color: AppColors.whiteColor,
+                    ),
                   ),
-                ),
-                monthViewSettings:
-                    const DateRangePickerMonthViewSettings(dayFormat: 'EEE'),
-                monthCellStyle: DateRangePickerMonthCellStyle(
-                  todayTextStyle: AppTextStyles.textMedium(
-                    color: AppColors.blue,
+                  monthViewSettings: const DateRangePickerMonthViewSettings(
+                    dayFormat: 'EEE',
                   ),
-                  disabledDatesTextStyle: AppTextStyles.textRegularSecondary(
-                    color: Colors.grey,
-                  ),
-                  textStyle: AppTextStyles.textRegularSecondary(
-                    color: AppColors.darkBlueColor,
-                  ),
-                  todayCellDecoration: BoxDecoration(
-                    border: Border.all(
+                  monthCellStyle: DateRangePickerMonthCellStyle(
+                    todayTextStyle: AppTextStyles.textMedium(
                       color: AppColors.blue,
-                      width: 1,
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+                    disabledDatesTextStyle: AppTextStyles.textRegularSecondary(
+                      color: Colors.grey,
+                    ),
+                    textStyle: AppTextStyles.textRegularSecondary(
+                      color: AppColors.darkBlueColor,
+                    ),
+                    todayCellDecoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.blue,
+                        width: 1,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          50,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                yearCellStyle: DateRangePickerYearCellStyle(
-                  todayTextStyle: AppTextStyles.textRegularSecondary(
-                    color: AppColors.blue,
-                  ),
-                  todayCellDecoration: BoxDecoration(
-                    border: Border.all(
+                  yearCellStyle: DateRangePickerYearCellStyle(
+                    todayTextStyle: AppTextStyles.textRegularSecondary(
                       color: AppColors.blue,
-                      width: 1,
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(30),
+                    todayCellDecoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.blue,
+                        width: 1,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(
+                          30,
+                        ),
+                      ),
                     ),
-                  ),
-                  textStyle: AppTextStyles.textRegularSecondary(
-                    color: AppColors.darkBlueColor,
+                    textStyle: AppTextStyles.textRegularSecondary(
+                      color: AppColors.darkBlueColor,
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:taskX/core/widget/custom_app_bar.dart';
 import 'package:taskX/core/widget/custom_button.dart';
 import 'package:taskX/core/widget/custom_header.dart';
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
+import 'package:taskX/features/task/presentation/cubit/task_cubit.dart';
 import 'package:taskX/features/task/presentation/widgets/create_task_form.dart';
 
 class CreateTaskScreen extends StatefulWidget {
@@ -23,40 +24,44 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Scaffold(
-          backgroundColor: AppColors.whiteColor,
-          appBar: CustomAppBar(
-            onPressedButtonBack: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          bottomSheet: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
-            child: CustomButton(
-              text: "Create",
-              onPressed: () {
-                // context.read<CategoryCubit>().validate();
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            backgroundColor: AppColors.whiteColor,
+            appBar: CustomAppBar(
+              onPressedButtonBack: () {
+                Navigator.of(context).pop();
               },
-              buttonColor: AppColors.blackColor,
-              textButtonColor: AppColors.whiteColor,
-              shadowColor: AppColors.blackColor,
             ),
-          ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: CustomHeader(title: "Create new Task"),
-                  ),
-                  sizeVer(16),
-                  CreateTaskForm(
-                    categories: context.read<HomeCubit>().categories,
-                  ),
-                ],
+            bottomSheet: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+              child: CustomButton(
+                text: "Create",
+                onPressed: () {
+                  context.read<TaskCubit>().validate();
+                },
+                buttonColor: AppColors.blackColor,
+                textButtonColor: AppColors.whiteColor,
+                shadowColor: AppColors.blackColor,
+              ),
+            ),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: CustomHeader(title: "Create new Task"),
+                    ),
+                    sizeVer(16),
+                    CreateTaskForm(
+                      categories: context.read<HomeCubit>().categories,
+                    ),
+                    sizeVer(MediaQuery.of(context).size.height / 10),
+                  ],
+                ),
               ),
             ),
           ),
