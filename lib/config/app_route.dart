@@ -12,6 +12,7 @@ import 'package:taskX/features/credential/presentation/screens/sign_in_screen.da
 import 'package:taskX/features/credential/presentation/screens/sign_up_screen.dart';
 import 'package:taskX/features/home/presentation/cubit/home_cubit.dart';
 import 'package:taskX/features/home/presentation/screens/home_screen.dart';
+import 'package:taskX/features/task/presentation/cubit/task_cubit.dart';
 import 'package:taskX/features/task/presentation/screens/create_task_screen.dart';
 
 import '../core/domain/entities/user/entities/user_entity.dart';
@@ -35,6 +36,8 @@ class AppRouter {
   AppRouter._();
   static final _credentialCubit = sl<CredentialCubit>();
   static final _categoryCubit = sl<CategoryCubit>();
+  static final _taskCubit = sl<TaskCubit>();
+  static final _homeCubit = sl<HomeCubit>();
 
   static Route<dynamic>? routesGenerator(RouteSettings settings) {
     final args = settings.arguments;
@@ -76,8 +79,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider<HomeCubit>.value(
-                value: sl<HomeCubit>()..homeLoadCategories(),
+              BlocProvider<HomeCubit>(
+                create: (context) => _homeCubit..homeLoadCategories(),
               ),
               BlocProvider<CategoryCubit>.value(value: _categoryCubit),
             ],
@@ -87,7 +90,18 @@ class AppRouter {
 
       case Routes.createTask:
         return MaterialPageRoute(
-          builder: (context) => const CreateTaskScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider<HomeCubit>.value(
+                value: _homeCubit,
+              ),
+              BlocProvider<TaskCubit>(
+                create: (context) => sl<TaskCubit>(),
+                // child: const CreateTaskScreen(),
+              ),
+            ],
+            child: const CreateTaskScreen(),
+          ),
         );
 
       case Routes.createCategory:

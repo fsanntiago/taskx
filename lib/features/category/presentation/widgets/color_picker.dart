@@ -50,7 +50,7 @@ class _ColorPickerState extends State<ColorPicker> {
             crossAxisSpacing: 5,
             mainAxisSpacing: 3.5,
           ),
-          itemCount: AppColors.ColorsTasksAndCategories.length,
+          itemCount: AppColors.colorsTasksAndCategories.length,
           itemBuilder: (context, index) {
             return InkWell(
               borderRadius: BorderRadius.circular(50),
@@ -64,11 +64,11 @@ class _ColorPickerState extends State<ColorPicker> {
                 semanticContainer: true,
                 elevation: 5,
                 shadowColor:
-                    AppColors.ColorsTasksAndCategories[index]!.withOpacity(0.4),
+                    AppColors.colorsTasksAndCategories[index]!.withOpacity(0.4),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
-                color: AppColors.ColorsTasksAndCategories[index],
+                color: AppColors.colorsTasksAndCategories[index],
                 child: _selectedItem == index
                     ? const SizedBox(
                         child: Icon(

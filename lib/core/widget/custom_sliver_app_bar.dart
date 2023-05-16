@@ -74,7 +74,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
           ? MediaQuery.of(context).size.height * 0.08
           : MediaQuery.of(context).size.height * 0.08,
       centerTitle: false,
-      leadingWidth: widget.backButton != false ? 36.0 : 0.0,
+      leadingWidth: widget.backButton != false ? 55.0 : 0.0,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
